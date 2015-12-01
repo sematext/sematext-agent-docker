@@ -1,7 +1,7 @@
 
 # Sematext Docker Agent
 
-This Agent collects Metrics, Events and Logs from the Docker API for [SPM Docker Monitoring](http://sematext.com/spm/integrations/docker-monitoring.html)(Application Performance Monitoring) & [Logsene / Hosted ELK](http://sematext.com/logsene) (Log Management)
+This Agent collects Metrics, Events and Logs from the Docker API for [SPM Docker Monitoring](http://sematext.com/spm/integrations/docker-monitoring.html) (Application Performance Monitoring) & [Logsene / Hosted ELK](http://sematext.com/logsene) (Log Management)
 
 ![](https://sematext.files.wordpress.com/2015/11/sematextdockeragent.png?w=640)
 
