@@ -1,0 +1,69 @@
+coreos: 
+  units:
+     etcd:
+        discovery: https://discovery.etcd.io/token
+        addr: $private_ipv4:4001
+        peer-addr: $private_ipv4:7001
+
+    fleet:
+        public-ip: $private_ipv4
+        etcd-servers: http://$private_ipv4:4001 
+
+    - name: etcd.service
+      command: start
+    - name: fleet.service
+      command: start
+    - name: sematext-agent.service
+      command: start
+      enable: true
+      runtime: no
+      content: |
+        [Unit]
+        Description=Sematext Docker Agent
+        After=docker.service
+        Requires=docker.service
+        [Service]
+        TimeoutStartSec=0
+        Restart=always
+        RestartSec=30s
+        ExecStartPre=-/bin/sh -c "/bin/etcdctl get /sematext.com/myapp/logsene/gateway_port || /bin/etcdctl set /sematext.com/myapp/logsene/gateway_port 9000"
+        ExecStartPre=/bin/sh -c "/usr/bin/docker kill sematext-agent-docker; true;"
+        ExecStartPre=/bin/sh -c "/usr/bin/docker rm -v sematext-agent-docker; true;"
+        ExecStartPre=/bin/sh -c "/usr/bin/docker pull sematext/sematext-agent-docker;true"
+        ExecStart=/bin/sh -c "set -ex; /usr/bin/docker run --name sematext-agent-docker \
+                              -e SPM_TOKEN=$(etcdctl get /sematext.com/myapp/spm/token) \
+                              -e HOSTNAME=$HOSTNAME -v /var/run/docker.sock:/var/run/docker.sock \
+                              -e LOGSENE_TOKEN=$(etcdctl get /sematext.com/myapp/logsene/token) \
+                              -p $(etcdctl get /sematext.com/myapp/logsene/gateway_port):9000 \
+                              sematext/sematext-agent-docker"
+        ExecStop=/usr/bin/docker stop sematext-agent-docker
+        [Install]
+        WantedBy=multi-user.target
+        [X-Fleet]
+        Global=true
+    - name: logsene.service
+      command: start
+      enable: true
+      runtime: no
+      content: |
+        [Unit]
+        Description=Logsene Log Forwarder
+        requires=spm-agent-v2.service
+        [Service]
+        Restart=always
+        RestartSec=10s
+        ExecStartPre=/bin/sh -c \
+                     "if [ -n \"$(etcdctl get /sematext.com/logsene/`hostname`/lastlog)\" ]; then  \
+                        echo \"Last log date: $(etcdctl get /sematext.com/logsene/`hostname`/lastlog)\"; \
+                      else \
+                        etcdctl set /sematext.com/logsene/`hostname`/lastlog\"`date +\"%Y-%%m-%d %%H:%M:%S\"`\"; true; \
+                      fi"
+        ExecStart=/bin/sh -c "journalctl --since \"$(etcdctl get /sematext.com/logsene/`hostname`/lastlog)\" -o json -f \
+                              | ncat localhost $(etcdctl get /sematext.com/myapp/logsene/gateway_port)"
+        ExecStopPost=/bin/sh -c "export D=\"`date +\"%Y-%%m-%%d %%H:%M:%S\"`\"; \
+                                 /bin/etcdctl set /sematext.com/logsene/$(hostname)/lastlog \"$D\""
+        [Install]
+        WantedBy=multi-user.target
+        [X-Fleet]
+        Global=true
+        

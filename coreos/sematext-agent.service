@@ -1,0 +1,28 @@
+[Unit]
+Description=Sematext Docker Agent
+After=docker.service
+Requires=docker.service
+
+[Service]
+TimeoutStartSec=0
+Restart=always
+RestartSec=30s
+
+ExecStartPre=-/bin/sh -c "/bin/etcdctl get /sematext.com/myapp/logsene/gateway_port || /bin/etcdctl set /sematext.com/myapp/logsene/gateway_port 9000"
+ExecStartPre=/bin/sh -c "/usr/bin/docker kill sematext-agent-docker; true;"
+ExecStartPre=/bin/sh -c "/usr/bin/docker rm -v sematext-agent-docker; true;"
+ExecStartPre=/bin/sh -c "/usr/bin/docker pull sematext/sematext-agent-docker;true"
+ExecStart=/bin/sh -c "set -ex; /usr/bin/docker run --name sematext-agent-docker \
+                      -e SPM_TOKEN=$(etcdctl get /sematext.com/myapp/spm/token) \
+                      -e HOSTNAME=$HOSTNAME -v /var/run/docker.sock:/var/run/docker.sock \
+                      -e LOGSENE_TOKEN=$(etcdctl get /sematext.com/myapp/logsene/token) \
+                      -p $(etcdctl get /sematext.com/myapp/logsene/gateway_port):9000 \
+                      sematext/sematext-agent-docker"
+
+ExecStop=/usr/bin/docker stop sematext-agent-docker
+
+[Install]
+WantedBy=multi-user.target
+
+[X-Fleet]
+Global=true

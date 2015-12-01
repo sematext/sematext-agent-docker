@@ -1,0 +1,23 @@
+[Unit]
+Description=Logsene Log Forwarder
+requires=spm-agent-v2.service
+
+[Service]
+Restart=always
+RestartSec=10s
+ExecStartPre=/bin/sh -c \
+             "if [ -n \"$(etcdctl get /sematext.com/logsene/`hostname`/lastlog)\" ]; then  \
+                echo \"Last log date: $(etcdctl get /sematext.com/logsene/`hostname`/lastlog)\"; \
+              else \
+                etcdctl set /sematext.com/logsene/`hostname`/lastlog\"`date +\"%Y-%%m-%d %%H:%M:%S\"`\"; true; \
+              fi"
+ExecStart=/bin/sh -c "journalctl --since \"$(etcdctl get /sematext.com/logsene/`hostname`/lastlog)\" -o json -f \
+                      | ncat localhost $(etcdctl get /sematext.com/myapp/logsene/gateway_port)"
+ExecStopPost=/bin/sh -c "export D=\"`date +\"%Y-%%m-%%d %%H:%M:%S\"`\"; \
+                         /bin/etcdctl set /sematext.com/logsene/$(hostname)/lastlog \"$D\""
+
+[Install]
+WantedBy=multi-user.target
+
+[X-Fleet]
+Global=true

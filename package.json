@@ -1,0 +1,75 @@
+{
+  "name": "sematext-agent-docker",
+  "version": "1.29.5",
+  "description": "Sematext Docker Agent - Metrics and Log Collection Agent for Docker",
+  "main": "lib/index.js",
+  "directories": {
+    "test": "test"
+  },
+  "bin": {
+    "sematext-agent-docker": "lib/index.js",
+    "spm-client-diagnostics": "bin/spm-client-diagnostics.js"
+  },
+  "scripts": {
+    "test": "mocha test/test.js",
+    "doc": "doxx --source . -i node_modules,spmlog,spmdb -t \"SPM Agent\" ./docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sematext/sematext-agent-docker.git"
+  },
+  "keywords": [
+    "SPM",
+    "APM",
+    "application performance monitoring",
+    "Sematext",
+    "performance monitoring",
+    "monitoring",
+    "alerting",
+    "anomaly detection",
+    "heartbeat",
+    "metrics",
+    "custom metrics",
+    "devops",
+    "operations",
+    "dashboards",
+    "profiling",
+    "docker",
+    "agent",
+    "logging"
+  ],
+  "author": "Sematext Group, Inc.",
+  "license": "Apache2",
+  "bugs": {
+    "url": "https://github.com/sematext/sematext-agent-docker/issues"
+  },
+  "homepage": "http://www.sematext.com",
+  "dependencies": {
+    "adm-zip": "^0.4.7",
+    "docker-events": "0.0.2",
+    "docker-loghose": "^0.7.0",
+    "docker-stats": "^0.5.0",
+    "dockerode": "^2.2.2",
+    "flat": "^1.5.1",
+    "line-delimited-json": "megastef/line-delimited-json",
+    "lodash": "^3.10.1",
+    "logagent-js": "^1.0.23",
+    "logsene-js": "^1.0.7",
+    "ls": "^0.1.0",
+    "measured": "^1.0.1",
+    "minimist": "^1.1.3",
+    "moment": "^2.10.6",
+    "node-df": "^0.1.1",
+    "procfs-stats": "0.0.4",
+    "request": "^2.60.0",
+    "spm-agent": "^1.29.3",
+    "spm-metrics-js": "^1.0.7",
+    "through2": "^0.6.5",
+    "which": "^1.0.9",
+    "winston": "^1.0.1"
+  },
+  "devDependencies": {
+    "doxx": "^1.2.6",
+    "mocha": "^2.2.1"
+  }
+}
