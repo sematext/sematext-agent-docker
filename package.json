@@ -47,7 +47,7 @@
   "dependencies": {
     "adm-zip": "^0.4.7",
     "docker-events": "0.0.2",
-    "docker-loghose": "^0.7.0",
+    "docker-loghose": "megastef/docker-loghose",
     "docker-stats": "^0.5.0",
     "dockerode": "^2.2.2",
     "flat": "^1.5.1",
