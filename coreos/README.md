@@ -1,4 +1,4 @@
-# Setup SPM on CoreOS
+# Setup Sematext Docker Agent on CoreOS
 
 This directory provides fleet units to install [SPM](http://sematext.com/spm/integrations/coreos-monitoring.html) on CoreOS
 - [sematext-agent.service](https://github.com/sematext/sematext-agent-docker/blob/master/coreos/sematext-agent.service)
