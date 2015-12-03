@@ -8,3 +8,10 @@ sematext-agent-docker:
   restart: always
   volumes:
     - '/var/run/docker.sock:/var/run/docker.sock'
+# More Information: 
+# https://github.com/sematext/sematext-agent-docker
+# http://www.sematext.com
+# Obtain your tokens here: https://apps.sematext.com/users-web/login.do
+# Create a Logsene App and copy the Token 
+# Create a SPM App of the type Docker and copy the Token 
+# Insert Tokens in this File in the environment section
