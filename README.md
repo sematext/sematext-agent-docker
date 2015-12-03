@@ -89,7 +89,7 @@ Docker Events:
 SPM for Docker recognizes log formats - so your logs arrive in a structured format in Logsene!
 The format recognition, data extractions, date parsing etc. is provided by [logagent-js](https://github.com/sematext/logagent-js) and covers:
 - Format detection e.g. for
-    	- Mongo DB
+  - Mongo DB
 	- Nginx
 	- Apache httpd, Kafka, Cassandra, HBase, Solr, Zookeeper
 	- MySQL
