@@ -107,7 +107,7 @@ Feel free to contribute to [logagent-js](https://github.com/sematext/logagent-js
 # Installation on CoreOS Linux
 
 Sematext Agent for Docker can monitor CoreOS clusters including metrics and logs from Docker and journald.   
-See: [Setup Sematext Agent on CoreOS](https://github.com/sematext/sematext-agent-docker/tree/master/coreos)
+See: [Setup Sematext Docker Agent on CoreOS](https://github.com/sematext/sematext-agent-docker/tree/master/coreos)
 
 # Support
 
