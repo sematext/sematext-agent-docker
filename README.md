@@ -5,7 +5,7 @@ Sematext Docker Agent collects Metrics, Events and Logs from the Docker API for 
 
 [![Deploy to Tutum](https://s.tutum.co/deploy-to-tutum.svg)](https://dashboard.tutum.co/stack/deploy/?repo=https://github.com/sematext/sematext-agent-docker)
 
-![Sematext container shipping metrics and logs](https://sematext.files.wordpress.com/2015/12/sematext-agent.png?w=400)
+![Sematext container shipping metrics and logs](https://sematext.files.wordpress.com/2015/12/sematext-agent.png?w=500)
 
 _Gathered information:_
 - **Operating System Metrics** of the Host machine (CPU / Mem / Swap/ ...) 
