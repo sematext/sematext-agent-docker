@@ -3,9 +3,11 @@
 
 This Agent collects Metrics, Events and Logs from the Docker API for [SPM Docker Monitoring](http://sematext.com/spm/integrations/docker-monitoring.html) (Application Performance Monitoring) & [Logsene / Hosted ELK](http://sematext.com/logsene) (Log Management)
 
+[![Deploy to Tutum](https://s.tutum.co/deploy-to-tutum.svg)](https://dashboard.tutum.co/stack/deploy/?repo=https://github.com/sematext/sematext-agent-docker)
+
 ![](https://sematext.files.wordpress.com/2015/11/sematextdockeragent.png?w=640)
 
-Gathered information:
+_Gathered information:_
 - Operating System Metrics of the Host machine (CPU / Mem / Swap/ ...) 
 - Docker Container **Metrics/Stats**
 	- CPU Usage
@@ -39,6 +41,7 @@ Gathered information:
 	- JSON, ... 
 
 ## Installation 
+
 1. Get a free account at [sematext.com/spm](https://apps.sematext.com/users-web/register.do)  
 2. [Create an SPM App](https://apps.sematext.com/spm-reports/registerApplication.do) of type "Docker" and copy the SPM Application Token 
    - For logs (optional) [create a Logsene App](https://apps.sematext.com/logsene-reports/registerApplication.do) to an App Token for [Logsene](http://www.sematext.com/logsene/)  
@@ -81,7 +84,7 @@ Gathered information:
 Docker Events:
 ![](https://sematext.files.wordpress.com/2015/06/bildschirmfoto-2015-06-24-um-13-56-39.png)
 
-## Integrated Log Parser
+# Integrated Log Parser
 
 SPM for Docker recognizes log formats - so your logs arrive in a structured format in Logsene!
 The format recognition, data extractions, date parsing etc. is provided by [logagent-js](https://github.com/sematext/logagent-js) and covers:
