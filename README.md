@@ -1,15 +1,15 @@
 
 # Sematext Docker Agent
 
-This Agent collects Metrics, Events and Logs from the Docker API for [SPM Docker Monitoring](http://sematext.com/spm/integrations/docker-monitoring.html) (Application Performance Monitoring) & [Logsene / Hosted ELK](http://sematext.com/logsene) (Log Management)
+Sematext Docker Agent collects Metrics, Events and Logs from the Docker API for [SPM Docker Monitoring](http://sematext.com/spm/integrations/docker-monitoring.html) & [Logsene / Hosted ELK](http://sematext.com/logsene) Log Management.
 
 [![Deploy to Tutum](https://s.tutum.co/deploy-to-tutum.svg)](https://dashboard.tutum.co/stack/deploy/?repo=https://github.com/sematext/sematext-agent-docker)
 
 ![](https://sematext.files.wordpress.com/2015/11/sematextdockeragent.png?w=640)
 
 _Gathered information:_
-- Operating System Metrics of the Host machine (CPU / Mem / Swap/ ...) 
-- Docker Container **Metrics/Stats**
+- **Operating System Metrics** of the Host machine (CPU / Mem / Swap/ ...) 
+- **Docker Container Metrics/Stats**
 	- CPU Usage
 	- Memory Usage
 	- Network Stats
@@ -23,22 +23,22 @@ _Gathered information:_
             - create, exec_create, destroy, export
         - Container Runtime Events like
             - die, exec_start, kill, pause, restart, start, stop, unpause, ...
-- Docker **Logs**
+- **Docker Logs**
   - default fields
 	- hostname / IP address
 	- container id
 	- container name
 	- image name
 	- message
-  - Log format detection and log parsers: 
-	- NGINX
-	- APACHE httpd, Kafka, Solr, HBase, Zookeeper, Cassandra
-	- MySQL
-	- MongoDB
-	- Redis
-	- Elasticsearch
-	- Nsq.io
-	- JSON, ... 
+  - **Log format detection and log parsers:** 
+		- NGINX
+		- Apache httpd, Kafka, Solr, HBase, Zookeeper, Cassandra
+		- MySQL
+		- MongoDB
+		- Redis
+		- Elasticsearch
+		- Nsq.io
+		- JSON, ... 
 
 ## Installation 
 
