@@ -1,7 +1,7 @@
 # Performance Metrics, Container Logs, Docker Events, 
 # Anomaly Detection and Alerts in one Place
 # 1. Login here: https://apps.sematext.com/users-web/login.do
-# 2. Create an Logsene App and copy the Logsene Token 
+# 2. Create a Logsene App and copy the Logsene Token 
 #    into the environment section 
 # 3. Create an SPM App for Docker and copy the SPM Token 
 #    into the environment section 
