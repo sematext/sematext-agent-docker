@@ -1,7 +1,7 @@
 
 # Sematext Docker Agent
 
-![build status](https://api.travis-ci.org/sematext/sematext-agent-docker.svg) [![Deploy to Tutum](https://s.tutum.co/deploy-to-tutum.svg)](https://dashboard.tutum.co/stack/deploy/?repo=https://github.com/sematext/sematext-agent-docker)
+[![Deploy to Tutum](https://s.tutum.co/deploy-to-tutum.svg)](https://dashboard.tutum.co/stack/deploy/?repo=https://github.com/sematext/sematext-agent-docker) ![build status](https://api.travis-ci.org/sematext/sematext-agent-docker.svg) 
 
 Sematext Docker Agent collects Metrics, Events and Logs from the Docker API for [SPM Docker Monitoring](http://sematext.com/spm/integrations/docker-monitoring.html) & [Logsene / Hosted ELK](http://sematext.com/logsene) Log Management. 
 
