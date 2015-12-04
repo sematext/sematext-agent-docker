@@ -5,7 +5,6 @@
 #    into the environment section 
 # 3. Create an SPM App for Docker and copy the SPM Token 
 #    into the environment section 
-# 4. Click 'Create Stack & deploy' in Tutum 
 sematext-agent-docker:
   image: 'sematext/sematext-agent-docker:latest'
   deployment_strategy: every_node
