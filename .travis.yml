@@ -1,9 +1,8 @@
 sudo: required
-
 services:
   - docker
 
- before_install:
+before_install:
   - docker build -t sematext/sematext-agent-docker .
   - docker run -d --name sematext-agent -e HOSTNAME=$HOSTNAME -e SPM_TOKEN=e3f24ef5-8580-4e09-916d-2b96ff849037 -v /var/run/docker.sock:/var/run/docker.sock sematext/sematext-agent-docker
 
