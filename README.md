@@ -49,7 +49,7 @@ _Gathered information:_
    - For logs (optional) [create a Logsene App](https://apps.sematext.com/logsene-reports/registerApplication.do) to an App Token for [Logsene](http://www.sematext.com/logsene/)  
 3. Run the image 
 	```
-	docker pull sematext/sematext-agent-agent
+	docker pull sematext/sematext-agent-docker
 	docker run -d --name sematext-agent-docker -e SPM_TOKEN=YOUR_SPM_TOKEN -e LOGSENE_TOKEN=YOUR_LOGSENE_TOKEN  -e HOSTNAME=$HOSTNAME  -v /var/run/docker.sock:/var/run/docker.sock sematext/sematext-agent-docker
 	```
 
