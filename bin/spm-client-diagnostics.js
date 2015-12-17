@@ -41,7 +41,7 @@ logfiles.forEach(function (f) {
   console.log ('Adding file ' + f.file )
   zip.addLocalFile(f.full)
 })
-var archFileName = os.tmpdir() + 'spm-diagnose.zip'
+var archFileName = path.join(os.tmpdir(), 'spm-diagnose.zip')
 zip.writeZip(archFileName)
 console.log('SPM diagnostics info is in  ' + archFileName)
 console.log('Please e-mail the file to spm-support@sematext.com')
