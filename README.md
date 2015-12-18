@@ -67,17 +67,18 @@ _Gathered information:_
   - -e DOCKER_HOST - e.g. tcp://ip-reachable-from-container:2375/ - if not set unix:///var/run/docker.sock or if this does not exists tcp://gateway:2375 will be used. In this case you don't need -v to mount /var/run/docker.sock
 	- -e DOCKER_PORT - in case Docker TCP connection is used, the agent will use its gateway address (autodetect) with the given DOCKER_PORT
   - -e DOCKER_TLS_VERIFY - 0 or 1
-  - -e DOCKER_CERT_PATH - path to your certificate files
+  - -e DOCKER_CERT_PATH - path to your certificate files, mount the path to the countainer with "-v $DOCKER_CERT_PATH:$DOCKER_CERT_PATH"  
 
-  Example using docker-machine: 
+  Example using docker-machine (Docker Swarm): 
   ```
-  > docker-machine env dev2
-  > export DOCKER_TLS_VERIFY=1
-  > export DOCKER_CERT_PATH="/Users/stefan/.docker/machine/machines/dev2"
-  > export DOCKER_HOST=tcp://192.168.99.100:2376
-  > eval "$(docker-machine env dev2)"
-  > docker run -d --name sematext-agent --restart=always -e SPM_TOKEN=MY_TOKEN -e HOSTNAME  -e DOCKER_TLS_VERIFY -e DOCKER_CERT_PATH -e DOCKER_HOST sematext/sematext-agent-docker
-	```
+  docker-machine env --swarm swarm-master
+  export DOCKER_TLS_VERIFY="1"
+  export DOCKER_HOST="tcp://192.168.99.101:3376"
+  export DOCKER_CERT_PATH="/Users/stefan/.docker/machine/machines/swarm-master"
+  export DOCKER_MACHINE_NAME="swarm-master"
+  eval "$(docker-machine env swarm-master)"
+  docker run -d --name sematext-agent --restart=always -e SPM_TOKEN=MY_TOKEN -e HOSTNAME  -e DOCKER_TLS_VERIFY -e DOCKER_CERT_PATH -e DOCKER_HOST -v -v $DOCKER_CERT_PATH:$DOCKER_CERT_PATH sematext/sematext-agent-docker
+  ```
 
 	**Optional Parameters:**
 	- --privileged  might be required for Security Enhanced Linux (the better way is to have the right policy ...)
