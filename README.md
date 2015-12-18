@@ -57,17 +57,17 @@ _Gathered information:_
 
 	**Required Parameters:**
 	- -e SPM_TOKEN - SPM Application Token
-	- -e HOSTNAME - Name of the docker host e.g. '$HOSTNAME' for Amazon ECS see HOSTNAME_LOOKUP_URL 
-	- -v /var/run/docker.sock - Path to the docker socket (optional, if dockerd provides TCP on 2375, see also DOCKER_PORT and DOCKER_HOST paramter)
+	- -e HOSTNAME - name of the docker host e.g. '$HOSTNAME' for Amazon ECS see HOSTNAME_LOOKUP_URL 
+	- -v /var/run/docker.sock - path to the docker socket (optional, if dockerd provides TCP on 2375, see also DOCKER_PORT and DOCKER_HOST paramter)
 	
 	**TCP and TLS connection (> image version 1.29.13 or dev)**
 
 	If the unix socket is not available Sematext Agent assumes the Container Gateway Address (autodetect) and port 2375 as default (no TLS) - this needs no configuration. In case the Docker Daemon TCP settings are different, you have to configure the TCP settings. The TCP settings can be modified with the following parameters:
 
-  - -e DOCKER_HOST e.g. tcp://ip-reachable-from-container:2375/ - if not set unix:///var/run/docker.sock or if this does not exists tcp://gateway:2375 will be used. In this case you don't need -v to mount /var/run/docker.sock
-	- -e DOCKER_PORT in case Docker TCP connection is used, the agent will use its gateway address (autodetect) with the given DOCKER_PORT
-  - -e DOCKER_TLS_VERIFY 0 or 1
-  - -e DOCKER_CERT_PATH path to your certificate files
+  - -e DOCKER_HOST - e.g. tcp://ip-reachable-from-container:2375/ - if not set unix:///var/run/docker.sock or if this does not exists tcp://gateway:2375 will be used. In this case you don't need -v to mount /var/run/docker.sock
+	- -e DOCKER_PORT - in case Docker TCP connection is used, the agent will use its gateway address (autodetect) with the given DOCKER_PORT
+  - -e DOCKER_TLS_VERIFY - 0 or 1
+  - -e DOCKER_CERT_PATH - path to your certificate files
 
   Example using docker-machine: 
   ```
@@ -82,17 +82,17 @@ _Gathered information:_
 	**Optional Parameters:**
 	- --privileged  might be required for Security Enhanced Linux (the better way is to have the right policy ...)
 	- -e HOSTNAME_LOOKUP_URL - On Amazon ECS, a [metadata query](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html) must be used to get the instance hostname (e.g. "169.254.169.254/latest/meta-data/local-hostname")
-	- -e HTTPS_PROXY - url for a proxy server
+	- -e HTTPS_PROXY - URL for a proxy server
 
-	**Docker Logs Parameters:**
+        **Docker Logs Parameters:**
 	- -e LOGSENE_TOKEN - Logsene Application Token for logs
 	- -e REMOVE_ANSI_ESCAPE_SEQ=enabled - removes e.g. ANSI Terminal color codes from logs for pattern matching 
-	- Whitelist containers for logging 
-	  - -e MATCH_BY_NAME - A regular expression to white list container names 
-	  - -e MATCH_BY_IMAGE - A regular expression to white list image names 
-	- Blacklist containers 
-	  - -e SKIP_BY_NAME - A regular expression to black list container names 
-	  - -e SKIP_BY_IMAGE - A regular expression to black list image names for logging 
+	- Whitelist containers for logging
+	  - -e MATCH_BY_NAME - regular expression to white list container names 
+	  - -e MATCH_BY_IMAGE - regular expression to white list image names 
+	- Blacklist containers
+	  - -e SKIP_BY_NAME - regular expression to black list container names 
+	  - -e SKIP_BY_IMAGE - regular expression to black list image names for logging 
 	  - -v /yourpatterns/patterns.yml:/etc/logagent/patterns.yml - to provide custom patterns for log parsing, see [logagent-js](https://github.com/sematext/logagent-js)
 
 
@@ -138,5 +138,3 @@ See: [Setup Sematext Docker Agent on CoreOS](https://github.com/sematext/sematex
 2. If you have questions about SPM for Docker, chat with us in the [SPM user interface](https://apps.sematext.com/users-web/login.do) or drop an e-mail to support@sematext.com
 3. Open an issue [here](https://github.com/sematext/sematext-agent-docker/issues) 
 4. Contribution guide [here](https://github.com/sematext/sematext-agent-docker/blob/master/contribute.md)
-
-
