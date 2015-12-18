@@ -1,4 +1,5 @@
 set -e 
+export DOCKER_PORT=${DOCKER_PORT:-2375}
 
 if [ -n "${TUTUM_NODE_HOSTNAME}" ]; then 
 	export HOSTNAME=$TUTUM_NODE_HOSTNAME
@@ -15,7 +16,7 @@ if [ -z "${DOCKER_HOST}" ]; then
 	if [ -r /var/run/docker.sock ]; then 
         export DOCKER_HOST=unix:///var/run/docker.sock
 	else
-        export DOCKER_HOST=tcp://$(netstat -nr | grep '^0\.0\.0\.0' | awk '{print $2}'):2375
+        export DOCKER_HOST=tcp://$(netstat -nr | grep '^0\.0\.0\.0' | awk '{print $2}'):$DOCKER_PORT
         echo "/var/run/docker.sock is not available set DOCKER_HOST=$DOCKER_HOST"
 	fi
 fi
