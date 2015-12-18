@@ -67,7 +67,7 @@ _Gathered information:_
   - -e DOCKER_HOST e.g. tcp://ip-reachable-from-container:2375/ - if not set unix:///var/run/docker.sock or if this does not exists tcp://gateway:2375 will be used. In this case you don't need -v to mount /var/run/docker.sock
 	- -e DOCKER_PORT in case Docker TCP connection is used, the agent will use its gateway address (autodetect) with the given DOCKER_PORT
   - -e DOCKER_TLS_VERIFY 0 or 1
-  - -e DOCKER_CERT_PATH path to your certs file, pls. note this 
+  - -e DOCKER_CERT_PATH path to your certificate files
 
   Example using docker-machine: 
   ```
