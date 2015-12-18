@@ -50,7 +50,9 @@ _Gathered information:_
 3. Run the image 
 	```
 	docker pull sematext/sematext-agent-docker
-	docker run -d --name sematext-agent-docker -e SPM_TOKEN=YOUR_SPM_TOKEN -e LOGSENE_TOKEN=YOUR_LOGSENE_TOKEN  -e HOSTNAME=$HOSTNAME  -v /var/run/docker.sock:/var/run/docker.sock sematext/sematext-agent-docker
+	docker run -d --name sematext-agent-docker -e SPM_TOKEN=YOUR_SPM_TOKEN -e LOGSENE_TOKEN=YOUR_LOGSENE_TOKEN  -e HOSTNAME  -v /var/run/docker.sock:/var/run/docker.sock sematext/sematext-agent-docker
+	# Alternative TCP: default TCP 2375 on 'localhost' (=> container gateway address), -v is not required
+	docker run -d --name sematext-agent-docker -e SPM_TOKEN=YOUR_SPM_TOKEN -e LOGSENE_TOKEN=YOUR_LOGSENE_TOKEN  -e HOSTNAME  sematext/sematext-agent-docker
 	```
 
 	**Required Parameters:**
@@ -60,7 +62,7 @@ _Gathered information:_
 	
 	**TCP and TLS connection (> image version 1.29.13 or dev)**
 
-	If the unix socket is not available Sematext Agent assumes the Container Gateway Address (autodetect) and port 2375 as default (no TLS) - this needs no add. configuration. In case the Docker Daemon is not using the default TCP port, you have to configure TCP settings. The TCP settings can be modified with the following parameters:
+	If the unix socket is not available Sematext Agent assumes the Container Gateway Address (autodetect) and port 2375 as default (no TLS) - this needs no configuration. In case the Docker Daemon TCP settings are different, you have to configure the TCP settings. The TCP settings can be modified with the following parameters:
 
   - -e DOCKER_HOST e.g. tcp://ip-reachable-from-container:2375/ - if not set unix:///var/run/docker.sock or if this does not exists tcp://gateway:2375 will be used. In this case you don't need -v to mount /var/run/docker.sock
 	- -e DOCKER_PORT in case Docker TCP connection is used, the agent will use its gateway address (autodetect) with the given DOCKER_PORT
