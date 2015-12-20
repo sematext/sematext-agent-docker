@@ -77,7 +77,7 @@ _Gathered information:_
   export DOCKER_CERT_PATH="/Users/stefan/.docker/machine/machines/swarm-master"
   export DOCKER_MACHINE_NAME="swarm-master"
   eval "$(docker-machine env swarm-master)"
-  docker run -d --name sematext-agent --restart=always -e SPM_TOKEN=MY_TOKEN -e HOSTNAME  -e DOCKER_TLS_VERIFY -e DOCKER_CERT_PATH -e DOCKER_HOST -v -v $DOCKER_CERT_PATH:$DOCKER_CERT_PATH sematext/sematext-agent-docker
+  docker run -d --name sematext-agent --restart=always -e SPM_TOKEN=MY_TOKEN -e HOSTNAME  -e DOCKER_TLS_VERIFY -e DOCKER_CERT_PATH -e DOCKER_HOST -v $DOCKER_CERT_PATH:$DOCKER_CERT_PATH sematext/sematext-agent-docker
   ```
 
 	**Optional Parameters:**
