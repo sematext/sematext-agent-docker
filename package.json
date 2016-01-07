@@ -42,14 +42,14 @@
   "license": "Apache2",
   "bugs": {
     "url": "https://github.com/sematext/sematext-agent-docker/issues"
-  },
+  }, 
   "homepage": "http://www.sematext.com",
   "dependencies": {
     "adm-zip": "^0.4.7",
     "docker-events": "0.0.2",
-    "docker-loghose": "megastef/docker-loghose",
+    "docker-loghose": "^0.7.0",
     "docker-stats": "^0.5.0",
-    "dockerode": "^2.2.2",
+    "dockerode": "^2.2.8",
     "flat": "^1.5.1",
     "line-delimited-json": "megastef/line-delimited-json",
     "lodash": "^3.10.1",
