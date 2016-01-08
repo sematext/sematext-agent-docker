@@ -1,4 +1,4 @@
-FROM mhart/alpine-node:5.4
+FROM mhart/alpine-node:4
 RUN apk update && apk add --update procps git curl && rm -rf /var/cache/apk/*
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
