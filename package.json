@@ -1,6 +1,6 @@
 {
   "name": "sematext-agent-docker",
-  "version": "1.29.23",
+  "version": "1.29.24",
   "description": "Sematext Docker Agent - Metrics and Log Collection Agent for Docker",
   "main": "lib/index.js",
   "directories": {
@@ -47,7 +47,7 @@
   "dependencies": {
     "adm-zip": "^0.4.7",
     "docker-events": "0.0.2",
-    "docker-loghose": "megastef/docker-loghose",
+    "docker-loghose": "^0.9",
     "docker-stats": "^0.5.1",
     "dockerode": "^2.2.8",
     "flat": "^1.5.1",
