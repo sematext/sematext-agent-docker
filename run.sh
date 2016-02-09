@@ -10,7 +10,7 @@ if [ -z "${DOCKER_HOST}" ]; then
 	fi
 fi
 
-export HOSTNAME=$(bin/docker-info.js Name)
+export HOSTNAME=$(docker-info Name)
 echo "Docker Hostname: ${HOSTNAME}"
 
 if [ -n "${TUTUM_NODE_HOSTNAME}" ]; then 
