@@ -8,6 +8,7 @@
   },
   "bin": {
     "sematext-agent-docker": "lib/index.js",
+    "docker-info": "bin/docker-info.js",
     "spm-client-diagnostics": "bin/spm-client-diagnostics.js"
   },
   "scripts": {
@@ -47,7 +48,7 @@
   "dependencies": {
     "adm-zip": "^0.4.7",
     "docker-events": "0.0.2",
-    "docker-loghose": "^0.9",
+    "docker-loghose": "^1.0",
     "docker-stats": "^0.5.1",
     "dockerode": "^2.2.8",
     "flat": "^1.5.1",
