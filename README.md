@@ -63,7 +63,7 @@ _Gathered information:_
 	- -e HOSTNAME - name of the docker host e.g. '$HOSTNAME' for Amazon ECS see HOSTNAME_LOOKUP_URL 
 	- -v /var/run/docker.sock - path to the docker socket (optional, if dockerd provides TCP on 2375, see also DOCKER_PORT and DOCKER_HOST paramter)
 	
-	**TCP and TLS connection (> image version 1.29.13 or dev)**
+	**TCP and TLS connection (> image version 1.29.13)**
 
 	If the unix socket is not available Sematext Agent assumes the Container Gateway Address (autodetect) and port 2375 as default (no TLS) - this needs no configuration. In case the Docker Daemon TCP settings are different, you have to configure the TCP settings. The TCP settings can be modified with the following parameters:
 
