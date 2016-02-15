@@ -6,6 +6,10 @@
 
 Sematext Docker Agent collects Metrics, Events and Logs from the Docker API for [SPM Docker Monitoring](http://sematext.com/spm/integrations/docker-monitoring.html) & [Logsene / Hosted ELK](http://sematext.com/logsene) Log Management. Works with CoreOS, RancherOS, Docker Swarm, Kubernetes, Apache Mesos, Hashicorp Nomad, Amzon ECS, ... see installation. 
 
+_How it works_
+
+Video: [Log Management for Docker](https://www.youtube.com/watch?v=cLKnn1Qbxlc&index=7&list=PLT_fd32OFYpfLBFZz_HiafnqjdlTth1NS)
+
 ![Sematext container shipping metrics and logs](https://sematext.files.wordpress.com/2015/12/sematext-agent.png?w=500)
 
 _Gathered information:_
