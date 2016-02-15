@@ -72,7 +72,7 @@ _Gathered information:_
   - -e DOCKER_TLS_VERIFY - 0 or 1
   - -e DOCKER_CERT_PATH - path to your certificate files, mount the path to the countainer with "-v $DOCKER_CERT_PATH:$DOCKER_CERT_PATH"  
 
-  Example using docker-machine (Docker Swarm): 
+  Example using docker-machine with [Docker Swarm](https://github.com/sematext/sematext-agent-docker/blob/master/README.md#installation-on-docker-swarm): 
   ```
   docker-machine env --swarm swarm-master
   export DOCKER_TLS_VERIFY="1"
