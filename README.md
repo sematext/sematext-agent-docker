@@ -136,7 +136,7 @@ See: [Setup Sematext Docker Agent on CoreOS](https://github.com/sematext/sematex
 
 # Installation on Kubernetes 
 
-Run Sematext Docker Agent as DaemonSet.
+Run Sematext Docker Agent as [Kubernetes DaemonSet](http://kubernetes.io/v1.1/docs/admin/daemons.html).
 
 1. Create [sematext-agent.yml](kubernetes/sematext-agent.yml) - and set your SPM and Logsene Token in the section spec.env.
 2. Run the DaemonSet
@@ -144,6 +144,14 @@ Run Sematext Docker Agent as DaemonSet.
 ```
 kubectl create -f sematext-agent.yml
 ```
+
+# Installation on Docker Swarm 
+
+Please read [Docker Swarm: Collecting Metrics, Events & Logs](http://blog.sematext.com/2016/01/12/docker-swarm-collecting-metrics-events-logs/)
+
+# Installation on Nomad by Hashicorp
+
+See and example of the [job description](hashicorp-nomad/sematext-docker-agent.nomad) for [Nomad by Hashicorp](https://www.nomadproject.io/)
 
 # Support
 
