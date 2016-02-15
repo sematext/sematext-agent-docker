@@ -11,7 +11,7 @@ spec:
       dnsPolicy: "ClusterFirst"
       restartPolicy: "Always"
       containers:
-      - name: sematext
+      - name: sematext-agent
         image: sematext/sematext-agent-docker:latest
         imagePullPolicy: "Always"
         env:
