@@ -153,6 +153,44 @@ Please read [Docker Swarm: Collecting Metrics, Events & Logs](http://blog.semate
 
 See and example of the [job description](hashicorp-nomad/sematext-docker-agent.nomad) for [Nomad by Hashicorp](https://www.nomadproject.io/)
 
+# Installation on Mesos / Marathon
+
+Please note that you have to specify the number of Mesos nodes (instances), SPM App Token and Logsene App Token. Example call to the Marathon API: 
+
+```
+curl -XPOST -H "Content-type: application/json" http://your_marathon_server:8080/v2/apps  -d '
+{
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "sematext/sematext-agent-docker"
+    },
+    "volumes": [
+      {
+        "containerPath": "/var/run/docker.sock",
+        "hostPath": "/var/run/docker.sock",
+        "mode": "RW"
+      }
+    ],
+    "network": "BRIDGE"
+  },
+  "env": {
+        "LOGSENE_TOKEN": "YOUR_LOGSENE_TOKEN",
+        "SPM_TOKEN": "YOUR_SPM_TOKEN" 
+  },
+  "id": "sematext-agent",
+  "instances": 1,
+  "cpus": 0.1,
+  "mem": 100,
+  "constraints": [
+    [
+      "hostname",
+      "UNIQUE"
+    ]
+  ]
+}
+```
+
 # Support
 
 1. Please check the [SPM for Docker Wiki](https://sematext.atlassian.net/wiki/display/PUBSPM/SPM+for+Docker)
