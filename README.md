@@ -136,47 +136,9 @@ See: [Setup Sematext Docker Agent on CoreOS](https://github.com/sematext/sematex
 
 # Installation on Kubernetes 
 
-Run Sematext Docker Agent as DaemonSet
+Run Sematext Docker Agent as DaemonSet.
 
-1. Create sematext-agent.yml - and set your SPM and Logsene Token in spec.env.
-
-	```
-	apiVersion: extensions/v1beta1
-	kind: DaemonSet
-	metadata:
-	  name: sematext-agent
-	spec:
-	  template:
-	    metadata:
-	      labels:
-	        app: sematext-agent
-	    spec:
-	      dnsPolicy: "ClusterFirst"
-	      restartPolicy: "Always"
-	      containers:
-	      - name: sematext
-	        image: sematext/sematext-agent-docker:latest
-	        imagePullPolicy: "Always"
-	        env:
-	        - name: SPM_TOKEN
-	          value: "YOUR_SPM_TOKEN"
-	        - name: LOGSENE_TOKEN
-	          value: "YOUR_LOGSENE_TOKEN"
-	        - name: KUBERNETES
-	          value: 1
-	        volumeMounts:
-	          - mountPath: /var/run/docker.sock
-	            name: docker-sock
-	          - mountPath: /etc/localtime
-	            name: localtime
-	      volumes:
-	        - name: docker-sock
-	          hostPath:
-	            path: /var/run/docker.sock
-	        - name: localtime
-	          hostPath:
-	            path: /etc/localtime
-	```
+1. Create [sematext-agent.yml](kubernetes/sematext-agent.yml) - and set your SPM and Logsene Token in the section spec.env.
 2. Run the DaemonSet
 
 ```
