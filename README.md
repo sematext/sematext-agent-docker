@@ -95,6 +95,7 @@ _Gathered information:_
 	  - -e SKIP_BY_NAME - regular expression to black list container names 
 	  - -e SKIP_BY_IMAGE - regular expression to black list image names for logging 
 	  - -v /yourpatterns/patterns.yml:/etc/logagent/patterns.yml - to provide custom patterns for log parsing, see [logagent-js](https://github.com/sematext/logagent-js)
+	- -e KUBERNETES set this variable to "1" to parse container names into the fields kubernetes.pod_name, kubernetes.namespace and kubernetes.container_name
 
 
 	You’ll see your Docker metrics in SPM after about a minute.
@@ -132,6 +133,56 @@ Feel free to contribute to [logagent-js](https://github.com/sematext/logagent-js
 
 Sematext Agent for Docker can monitor CoreOS clusters including metrics and logs from Docker and journald.   
 See: [Setup Sematext Docker Agent on CoreOS](https://github.com/sematext/sematext-agent-docker/tree/master/coreos)
+
+# Installation on Kubernetes 
+
+Run Sematext Docker Agent as DaemonSet
+
+1. Create sematex-agent.yml - and set your SPM and Logsene Token in spec.env.
+
+```
+apiVersion: extensions/v1beta1
+kind: DaemonSet
+metadata:
+  name: sematext-agent
+spec:
+  template:
+    metadata:
+      labels:
+        app: sematext-agent
+    spec:
+      dnsPolicy: "ClusterFirst"
+      restartPolicy: "Always"
+      containers:
+      - name: sematext
+        image: sematext/sematext-agent-docker:latest
+        imagePullPolicy: "Always"
+        env:
+        - name: SPM_TOKEN
+          value: "YOUR_SPM_TOKEN"
+        - name: LOGSENE_TOKEN
+          value: "YOUR_LOGSENE_TOKEN"
+        - name: KUBERNETES
+          value: 1
+        volumeMounts:
+          - mountPath: /var/run/docker.sock
+            name: docker-sock
+          - mountPath: /etc/localtime
+            name: localtime
+      volumes:
+        - name: docker-sock
+          hostPath:
+            path: /var/run/docker.sock
+        - name: localtime
+          hostPath:
+            path: /etc/localtime
+```
+
+2. Run the DaemonSet
+
+```
+kubectl create -f sematext-agent.yml
+```
 
 # Support
 
