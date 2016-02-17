@@ -1,6 +1,9 @@
 set -e 
 export DOCKER_PORT=${DOCKER_PORT:-2375}
 
+export LOGSENE_TMP_DIR=./logsene-log-buffer
+mkdir -p LOGSENE_TMP_DIR
+
 if [ -z "${DOCKER_HOST}" ]; then 
 	if [ -r /var/run/docker.sock ]; then 
         export DOCKER_HOST=unix:///var/run/docker.sock
