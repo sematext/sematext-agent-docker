@@ -55,7 +55,7 @@
     "line-delimited-json": "megastef/line-delimited-json",
     "lodash": "^3.10.1",
     "logagent-js": "^1.0.23",
-    "logsene-js": "^1.0.7",
+    "logsene-js": "^1.0.12",
     "ls": "^0.1.0",
     "measured": "^1.0.1",
     "minimist": "^1.1.3",
