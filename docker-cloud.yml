@@ -1,0 +1,20 @@
+# Performance Metrics, Container Logs, Docker Events, 
+# Anomaly Detection and Alerts in one Place
+# 1. Login here: https://apps.sematext.com/users-web/login.do
+# 2. Create a Logsene App and copy the Logsene Token 
+#    into the environment section 
+# 3. Create an SPM App for Docker and copy the SPM Token 
+#    into the environment section 
+sematext-agent-docker:
+  image: 'sematext/sematext-agent-docker:latest'
+  deployment_strategy: every_node
+  environment:
+    - LOGSENE_TOKEN=YOUR-LOGSENE-TOKEN
+    - SPM_TOKEN=YOUR-SPM-TOKEN
+  privileged: true
+  restart: always
+  volumes:
+    - '/var/run/docker.sock:/var/run/docker.sock'
+# More Information: 
+# https://github.com/sematext/sematext-agent-docker
+# http://www.sematext.com
