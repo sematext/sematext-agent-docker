@@ -8,6 +8,7 @@ spec:
       labels:
         app: sematext-agent
     spec:
+      selector: {}
       dnsPolicy: "ClusterFirst"
       restartPolicy: "Always"
       containers:
