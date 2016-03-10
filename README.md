@@ -106,7 +106,7 @@ _Gathered information:_
 	
 5. Watch metrics, use anomaly detection for alerts, create e-mail reports and [much more ...](http://blog.sematext.com/2015/06/09/docker-monitoring-support/)
 
-![](https://sematext.files.wordpress.com/2015/06/docker-overview-2.png)
+![](https://raw.githubusercontent.com/sematext/sematext-agent-docker/master/docker-overview-spm.png)
 
 ![](https://sematext.files.wordpress.com/2015/06/docker-network-metrics.png)
 
