@@ -89,8 +89,8 @@ _Gathered information:_
 	- --privileged  might be required for Security Enhanced Linux (the better way is to have the right policy ...)
 	- -e HOSTNAME_LOOKUP_URL - On Amazon ECS, a [metadata query](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html) must be used to get the instance hostname (e.g. "169.254.169.254/latest/meta-data/local-hostname")
 	- -e HTTPS_PROXY - URL for a proxy server (behind firewalls)
-        - -e LOGSENE_URL - URL for bulk inserts into Logsene. The default value is https://logsene-receiver.sematext.com/_bulk". This URL must be changed in case you use Logsene On-Premises. 
-         - -e SPM_URL - URL for bulk inserts into SPM. This URL must be changed in case you use Logsene On-Premises. 
+	- -e LOGSENE_URL - URL for bulk inserts into Logsene. The default value is https://logsene-receiver.sematext.com/_bulk". This URL must be changed in case you use Logsene On-Premises. 
+	- -e SPM_URL - URL for bulk inserts into SPM. This URL must be changed in case you use Logsene On-Premises. 
   
         **Docker Logs Parameters:**
 	- -e LOGSENE_TOKEN - Logsene Application Token for logs 
