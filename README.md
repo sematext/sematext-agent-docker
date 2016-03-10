@@ -108,7 +108,7 @@ _Gathered information:_
 
 ![](https://raw.githubusercontent.com/sematext/sematext-agent-docker/master/docker-overview-spm.png)
 
-![](https://sematext.files.wordpress.com/2015/06/docker-network-metrics.png)
+![](https://raw.githubusercontent.com/sematext/sematext-agent-docker/master/docker-detailed-metrics.png)
 
 Docker Events:
 ![](https://sematext.files.wordpress.com/2015/06/bildschirmfoto-2015-06-24-um-13-56-39.png)
