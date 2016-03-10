@@ -70,7 +70,7 @@ _Gathered information:_
 	If the unix socket is not available Sematext Agent assumes the Container Gateway Address (autodetect) and port 2375 as default (no TLS) - this needs no configuration. In case the Docker Daemon TCP settings are different, you have to configure the TCP settings. The TCP settings can be modified with the following parameters:
 
   - -e DOCKER_HOST - e.g. tcp://ip-reachable-from-container:2375/ - if not set unix:///var/run/docker.sock or if this does not exists tcp://gateway:2375 will be used. In this case you don't need -v to mount /var/run/docker.sock
-	- -e DOCKER_PORT - in case Docker TCP connection is used, the agent will use its gateway address (autodetect) with the given DOCKER_PORT
+  - -e DOCKER_PORT - in case Docker TCP connection is used, the agent will use its gateway address (autodetect) with the given DOCKER_PORT
   - -e DOCKER_TLS_VERIFY - 0 or 1
   - -e DOCKER_CERT_PATH - path to your certificate files, mount the path to the countainer with "-v $DOCKER_CERT_PATH:$DOCKER_CERT_PATH"  
 
@@ -89,8 +89,8 @@ _Gathered information:_
 	- --privileged  might be required for Security Enhanced Linux (the better way is to have the right policy ...)
 	- -e HOSTNAME_LOOKUP_URL - On Amazon ECS, a [metadata query](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html) must be used to get the instance hostname (e.g. "169.254.169.254/latest/meta-data/local-hostname")
 	- -e HTTPS_PROXY - URL for a proxy server (behind firewalls)
-	- -e LOGSENE_URL - URL for bulk inserts into Logsene. The default value is https://logsene-receiver.sematext.com/_bulk". This URL must be changed in case you use Logsene On-Premises. 
-	- -e SPM_URL - URL for bulk inserts into SPM. This URL must be changed in case you use Logsene On-Premises. 
+	- -e LOGSENE_URL - URL for bulk inserts into Logsene. Required only for Logsene On-Premises only. 
+	- -e SPM_URL - URL for bulk inserts into SPM. Required only for SPM On-Premises. 
   
         **Docker Logs Parameters:**
 	- -e LOGSENE_TOKEN - Logsene Application Token for logs 
