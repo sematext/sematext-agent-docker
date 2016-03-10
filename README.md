@@ -88,11 +88,11 @@ _Gathered information:_
 	**Optional Parameters:**
 	- --privileged  might be required for Security Enhanced Linux (the better way is to have the right policy ...)
 	- -e HOSTNAME_LOOKUP_URL - On Amazon ECS, a [metadata query](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html) must be used to get the instance hostname (e.g. "169.254.169.254/latest/meta-data/local-hostname")
-	- -e HTTPS_PROXY - URL for a proxy server
-
+	- -e HTTPS_PROXY - URL for a proxy server (behind firewalls)
+  - -e LOGSENE_URL - URL for bulk inserts into Logsene. The default value is https://logsene-receiver.sematext.com/_bulk". This URL must be changed in case you use Logsene On-Premises. 
+  - -e SPM_URL - URL for bulk inserts into SPM. This URL must be changed in case you use Logsene On-Premises. 
         **Docker Logs Parameters:**
-	- -e LOGSENE_TOKEN - Logsene Application Token for logs
-	- -e REMOVE_ANSI_ESCAPE_SEQ=enabled - removes e.g. ANSI Terminal color codes from logs for pattern matching 
+	- -e LOGSENE_TOKEN - Logsene Application Token for logs 
 	- Whitelist containers for logging
 	  - -e MATCH_BY_NAME - regular expression to white list container names 
 	  - -e MATCH_BY_IMAGE - regular expression to white list image names 
@@ -100,6 +100,7 @@ _Gathered information:_
 	  - -e SKIP_BY_NAME - regular expression to black list container names 
 	  - -e SKIP_BY_IMAGE - regular expression to black list image names for logging 
 	  - -v /yourpatterns/patterns.yml:/etc/logagent/patterns.yml - to provide custom patterns for log parsing, see [logagent-js](https://github.com/sematext/logagent-js)
+    - -v /tmp:/logsene-log-buffer a directory to store logs, in case of a network or service outage. Docker Agent deletes this files after successful transmission.  
 	- -e KUBERNETES set this variable to "1" to parse container names into the fields kubernetes.pod_name, kubernetes.namespace and kubernetes.container_name
 
 
