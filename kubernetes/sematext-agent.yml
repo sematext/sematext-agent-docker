@@ -1,4 +1,7 @@
+# Kubernetes 1.1.8
 apiVersion: extensions/v1beta1
+# Kubernetes 1.2
+# apiVersion: v1
 kind: DaemonSet
 metadata:
   name: sematext-agent
