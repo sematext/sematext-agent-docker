@@ -16,9 +16,9 @@ fi
 export HOSTNAME=$(docker-info Name)
 echo "Docker Hostname: ${HOSTNAME}"
 
-if [ -n "${TUTUM_NODE_HOSTNAME}" ]; then 
-	export HOSTNAME=$TUTUM_NODE_HOSTNAME
-	echo "Tutum Node Hostname: ${HOSTNAME}"
+if [ -n "${DOCKERCLOUD_NODE_HOSTNAME}" ]; then 
+	export HOSTNAME=$DOCKERCLOUD_NODE_HOSTNAME
+	echo "Docker Cloud Node Hostname: ${HOSTNAME}"
 fi
 
 if [ -n "${HOSTNAME_LOOKUP_URL}" ]; then 
