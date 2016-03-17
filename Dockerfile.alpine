@@ -1,13 +1,25 @@
-FROM mhart/alpine-node:4
-RUN apk update && apk add --update procps git curl && rm -rf /var/cache/apk/*
-RUN mkdir -p /usr/src/app
+FROM alpine:edge
+
+RUN apk --no-cache add \
+    tini \
+    nodejs \
+    procps \
+    curl
+
+COPY . /usr/src/app
 WORKDIR /usr/src/app
 
-COPY package.json /usr/src/app/
-COPY . /usr/src/app
-RUN npm install -g
+RUN apk --no-cache add --virtual deps git \
+  && npm install -g \
+  && apk del deps \
+  # Clean up obsolete files:
+  && rm -rf \
+    /tmp/* \
+    /root/.npm
 
-COPY ./run.sh /run.sh
-RUN chmod +x /run.sh
+RUN ln -s /usr/src/app/run.sh /usr/local/bin/run-sematext-agent
+
 EXPOSE 9000
-CMD /run.sh
+
+ENTRYPOINT ["tini", "--"]
+CMD ["run-sematext-agent"]
