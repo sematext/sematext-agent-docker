@@ -1,3 +1,10 @@
 LICENSE
 *.md
 *.png
+node_modules
+kubernetes
+coreos
+hashicorp-nomad
+.travis.yml
+docker-cloud.yml
+tutum.yml
