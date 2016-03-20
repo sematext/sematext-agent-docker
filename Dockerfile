@@ -1,34 +1,22 @@
-FROM node:4.3.0-slim
+FROM alpine:3.3
 
-RUN apt-get update && apt-get install -y \
-  curl \
- # Remove obsolete files:
- && apt-get clean \
- && rm -rf \
-   /tmp/* \
-   /usr/share/doc/* \
-   /var/cache/* \
-   /var/lib/apt/lists/* \
-   /var/tmp/*
-
-RUN curl -L \
- https://github.com/krallin/tini/releases/download/v0.9.0/tini \
- > /usr/local/bin/tini && chmod 755 /usr/local/bin/tini
+RUN apk --no-cache add \
+    tini \
+    nodejs \
+    procps \
+    curl \
+    coreutils
 
 COPY . /usr/src/app
 WORKDIR /usr/src/app
 
-RUN apt-get update && apt-get install -y git \
+RUN apk --no-cache add --virtual deps git \
   && npm install -g \
-  && apt-get remove --auto-remove -y git \
-  # Remove obsolete files:
-  && apt-get clean \
+  && apk del deps \
+  # Clean up obsolete files:
   && rm -rf \
     /tmp/* \
-    /usr/share/doc/* \
-    /var/cache/* \
-    /var/lib/apt/lists/* \
-    /var/tmp/*
+    /root/.npm
 
 RUN ln -s /usr/src/app/run.sh /usr/local/bin/run-sematext-agent
 
