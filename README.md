@@ -115,6 +115,21 @@ _Gathered information:_
 Docker Events:
 ![](https://raw.githubusercontent.com/sematext/sematext-agent-docker/master/docker-events-spm.png)
 
+# Log Routing
+
+Routing logs from different containers to separate Logsene Apps can be configured via docker labels. Simply tag a container with the label ```LOGSENE_TOKEN```. 
+
+Sematext Docker Agent inspects the containers for this Label and ships the logs to the defined Logsene App. 
+
+Example: 
+The following command will start nginx webserver and logs for this container will be shipped to the related Logsene App. 
+
+```
+docker run --label LOGSENE_TOKEN=REPLACE_WITH_YOUR_LOGSENE_TOKEN -p 80:80 nginx
+```
+
+All other container logs will be shipped to the Logsene App specified in the docker run command for ```sematext/sematext-agent-docker``` with the environment variable LOGSENE_TOKEN.
+
 # Integrated Log Parser
 
 SPM for Docker recognizes log formats - so your logs arrive in a structured format in Logsene!
@@ -127,6 +142,8 @@ The format recognition, data extractions, date parsing etc. is provided by [loga
 	- Redis  
 - plain text log messages
 - line delimited JSON logs
+- GeoIP enrichment for webserver logs, or any other field defined
+  in the pattern defiitions
 
 To use a custom pattern definition simply mount a volume to '/etc/logagent/patterns.yml':
 ```
