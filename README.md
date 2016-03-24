@@ -119,6 +119,7 @@ Docker Events:
 
 Routing logs from different containers to separate Logsene Apps can be configured via docker labels. Simply tag a container with the label ```LOGSENE_TOKEN```. 
 Sematext Docker Agent inspects the containers for this Label and ships the logs to the defined Logsene App. 
+
 __Example:__ 
 The following command will start nginx webserver and logs for this container will be shipped to the related Logsene App. 
 
