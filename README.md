@@ -142,7 +142,7 @@ The format recognition, data extractions, date parsing etc. is provided by [loga
 - plain text log messages
 - line delimited JSON logs
 - GeoIP enrichment for webserver logs, or any other field defined
-  in the pattern defiitions
+  in the pattern definitions
 
 To use a custom pattern definition simply mount a volume to '/etc/logagent/patterns.yml':
 ```
