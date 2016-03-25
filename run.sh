@@ -4,7 +4,7 @@ set -e
 export spmagent_spmSenderBulkInsertUrl=${SPM_URL:-https://spm-receiver.sematext.com:443/receiver/v1/_bulk}
 export DOCKER_PORT=${DOCKER_PORT:-2375}
 export LOGSENE_TMP_DIR=/logsene-log-buffer
-# defaut is /tmp/ but this consumes 70 MB ram
+# default is /tmp/ but this consumes 70 MB RAM
 # to speed up GeoIP lookups the directory could be set back to /tmp/
 export MAXMIND_DB_DIR=${MAXMIND_DB_DIR:-/usr/src/app}
 mkdir -p $LOGSENE_TMP_DIR
