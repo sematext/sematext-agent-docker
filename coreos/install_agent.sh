@@ -16,7 +16,6 @@ if [[ -n "$1" && -n "$2" && -n "$3"  ]] ; then
 else 
 	if [[ $# -eq 1 ]] ; then 
 	  export SPM_TOKEN=$1
-	  echo $SPM_TOKEN
 	  etcdctl set /sematext.com/myapp/spm/token $SPM_TOKEN
 	  etcdctl set /sematext.com/myapp/logsene/gateway_port 9000
 	  wget https://raw.githubusercontent.com/sematext/sematext-agent-docker/master/coreos/sematext-agent.service
