@@ -6,7 +6,9 @@ export DOCKER_PORT=${DOCKER_PORT:-2375}
 export LOGSENE_TMP_DIR=/logsene-log-buffer
 # default is /tmp/ but this consumes 70 MB RAM
 # to speed up GeoIP lookups the directory could be set back to /tmp/
-export MAXMIND_DB_DIR=${MAXMIND_DB_DIR:-/usr/src/app}
+export MAXMIND_DB_DIR=${MAXMIND_DB_DIR:-/usr/src/app/}
+sh -c "curl geolite.maxmind.com/download/geoip/database/GeoIPCity.dat -o ${MAXMIND_DB_DIR}GeoIPCity.dat; true"
+
 mkdir -p $LOGSENE_TMP_DIR
 
 if [ -z "${DOCKER_HOST}" ]; then
