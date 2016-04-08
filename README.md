@@ -90,8 +90,8 @@ _Gathered information:_
 	- -e HTTPS_PROXY - URL for a proxy server (behind firewalls)
 	- -e LOGSENE_URL - URL for bulk inserts into Logsene. Required only for Logsene On-Premises only.
 	- -e SPM_URL - URL for bulk inserts into SPM. Required only for SPM On-Premises. 
-  - -e GEOIP_DISABLED - disables GeoIP lookups in the log parser, default value: "true" 
-
+  - -e GEOIP_ENABLED - enables GeoIP lookups in the log parser, default value: "false" 
+  - -e MAXMIND_DB_DIR - directory for the Geo-IP lite database, must end with ```/```. Storing the DB in a volume could save downloads for updates after restarts. Using ```/tmp/``` (ramdisk) could speed up Geo-IP lookups (consumes add. ~30 MB main memory).
         **Docker Logs Parameters:**
 	- -e LOGSENE_TOKEN - Logsene Application Token for logs 
 	- Whitelist containers for logging
