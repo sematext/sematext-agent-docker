@@ -1,6 +1,6 @@
 {
   "name": "sematext-agent-docker",
-  "version": "1.29.41",
+  "version": "1.29.42",
   "description": "Sematext Docker Agent - Metrics and Log Collection Agent for Docker",
   "main": "lib/index.js",
   "directories": {
@@ -63,7 +63,7 @@
     "node-df": "^0.1.1",
     "procfs-stats": "0.0.4",
     "request": "^2.60.0",
-    "spm-agent": "^1.29.4",
+    "spm-agent": "^1.29.9",
     "spm-metrics-js": "^1.0.7",
     "through2": "^0.6.5",
     "which": "^1.0.9",
