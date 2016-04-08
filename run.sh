@@ -7,7 +7,11 @@ export LOGSENE_TMP_DIR=/logsene-log-buffer
 # default is /tmp/ but this consumes 70 MB RAM
 # to speed up GeoIP lookups the directory could be set back to /tmp/
 export MAXMIND_DB_DIR=${MAXMIND_DB_DIR:-/usr/src/app/}
-sh -c "curl geolite.maxmind.com/download/geoip/database/GeoIPCity.dat -o ${MAXMIND_DB_DIR}GeoIPCity.dat; true"
+export GEOIP_DISABLED=${GEOIP_DISABLED:-true}
+
+if [ "$GEOIP_DISABLED" == "false" ]; then
+  sh -c "curl geolite.maxmind.com/download/geoip/database/GeoIPCity.dat -o ${MAXMIND_DB_DIR}GeoIPCity.dat; true"
+fi
 
 mkdir -p $LOGSENE_TMP_DIR
 
@@ -20,18 +24,18 @@ if [ -z "${DOCKER_HOST}" ]; then
   fi
 fi
 
-export HOSTNAME=$(docker-info Name)
-echo "Docker Hostname: ${HOSTNAME}"
+export SPM_REPORTED_HOSTNAME=$(docker-info Name)
+echo "Docker Hostname: ${SPM_REPORTED_HOSTNAME}"
 
 if [ -n "${DOCKERCLOUD_NODE_HOSTNAME}" ]; then
-  export HOSTNAME=$DOCKERCLOUD_NODE_HOSTNAME
-  echo "Docker Cloud Node Hostname: ${HOSTNAME}"
+  export SPM_REPORTED_HOSTNAME=$DOCKERCLOUD_NODE_HOSTNAME
+  echo "Docker Cloud Node Hostname: ${SPM_REPORTED_HOSTNAME}"
 fi
 
 if [ -n "${HOSTNAME_LOOKUP_URL}" ]; then
   echo Hostname lookup: ${HOSTNAME_LOOKUP_URL}
-  export HOSTNAME=$(curl -s $HOSTNAME_LOOKUP_URL)
-  echo "Hostname lookup from ${HOSTNAME_LOOKUP_URL}: ${HOSTNAME}"
+  export SPM_REPORTED_HOSTNAME=$(curl -s $HOSTNAME_LOOKUP_URL)
+  echo "Hostname lookup from ${HOSTNAME_LOOKUP_URL}: ${SPM_REPORTED_HOSTNAME}"
 fi
 
 exec sematext-agent-docker ${SPM_TOKEN}
