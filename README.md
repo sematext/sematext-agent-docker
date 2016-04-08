@@ -85,12 +85,13 @@ _Gathered information:_
   ```
 
 	**Optional Parameters:**
-	- --privileged  might be required for Security Enhanced Linux (the better way is to have the right policy ...)
+	- --privileged might be required for Security Enhanced Linux (the better way is to have the right policy ...)
 	- -e HOSTNAME_LOOKUP_URL - On Amazon ECS, a [metadata query](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html) must be used to get the instance hostname (e.g. "169.254.169.254/latest/meta-data/local-hostname")
 	- -e HTTPS_PROXY - URL for a proxy server (behind firewalls)
 	- -e LOGSENE_URL - URL for bulk inserts into Logsene. Required only for Logsene On-Premises only.
 	- -e SPM_URL - URL for bulk inserts into SPM. Required only for SPM On-Premises. 
-  
+  - -e GEOIP_DISABLED - disables GeoIP lookups in the log parser, default value: "true" 
+
         **Docker Logs Parameters:**
 	- -e LOGSENE_TOKEN - Logsene Application Token for logs 
 	- Whitelist containers for logging
