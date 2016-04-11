@@ -36,59 +36,59 @@ _Gathered information:_
 2. [Create an SPM App](https://apps.sematext.com/spm-reports/registerApplication.do) of type "Docker" and copy the SPM Application Token 
    - For logs (optional) [create a Logsene App](https://apps.sematext.com/logsene-reports/registerApplication.do) to an App Token for [Logsene](http://www.sematext.com/logsene/)  
 3. Run the image 
-	```
-	docker pull sematext/sematext-agent-docker
-	docker run -d --name sematext-agent-docker -e SPM_TOKEN=YOUR_SPM_TOKEN -e LOGSENE_TOKEN=YOUR_LOGSENE_TOKEN  -e HOSTNAME  -v /var/run/docker.sock:/var/run/docker.sock sematext/sematext-agent-docker
-	# Alternative TCP: default TCP 2375 on 'localhost' (=> container gateway address), -v is not required
-	docker run -d --name sematext-agent-docker -e SPM_TOKEN=YOUR_SPM_TOKEN -e LOGSENE_TOKEN=YOUR_LOGSENE_TOKEN  -e HOSTNAME  sematext/sematext-agent-docker
-	```
-
-	**Required Parameters:**
+		```
+		docker pull sematext/sematext-agent-docker
+		docker run -d --name sematext-agent-docker -e SPM_TOKEN=YOUR_SPM_TOKEN -e LOGSENE_TOKEN=YOUR_LOGSENE_TOKEN  -e HOSTNAME  -v /var/run/docker.sock:/var/run/docker.sock sematext/sematext-agent-docker
+		# Alternative TCP: default TCP 2375 on 'localhost' (=> container gateway address), -v is not required
+		docker run -d --name sematext-agent-docker -e SPM_TOKEN=YOUR_SPM_TOKEN -e LOGSENE_TOKEN=YOUR_LOGSENE_TOKEN  -e HOSTNAME  sematext/sematext-agent-docker
+		```
 	
-| Parameter / Environment variable | Description |
-|-----------|-------------|
-| SPM_TOKEN | SPM Application Token |
-| ```-v /var/run/docker.sock ```  | path to the docker socket (optional, if dockerd provides TCP on 2375, see also DOCKER_PORT and DOCKER_HOST paramter) |
-|**TCP and TLS connection**|If the unix socket is not available Sematext Agent assumes the Container Gateway Address (autodetect) and port 2375 as default (no TLS) - this needs no configuration. In case the Docker Daemon TCP settings are different, you have to configure the TCP settings. The TCP settings can be modified with the following parameters|
-|DOCKER_HOST| e.g. tcp://ip-reachable-from-container:2375/ - if not set unix:///var/run/docker.sock or if this does not exists tcp://gateway:2375 will be used. In this case you don't need -v to mount /var/run/docker.sock |
-| DOCKER_PORT | in case Docker TCP connection is used, the agent will use its gateway address (autodetect) with the given DOCKER_PORT|
-|DOCKER_TLS_VERIFY | 0 or 1|
-|DOCKER_CERT_PATH | path to your certificate files, mount the path to the countainer with "-v $DOCKER_CERT_PATH:$DOCKER_CERT_PATH" |  
-
-Example using docker-machine with [Docker Swarm](https://github.com/sematext/sematext-agent-docker/blob/master/README.md#installation-on-docker-swarm): 
-  ```
-  docker-machine env --swarm swarm-master
-  export DOCKER_TLS_VERIFY="1"
-  export DOCKER_HOST="tcp://192.168.99.101:3376"
-  export DOCKER_CERT_PATH="/Users/stefan/.docker/machine/machines/swarm-master"
-  export DOCKER_MACHINE_NAME="swarm-master"
-  eval "$(docker-machine env swarm-master)"
-  docker run -d --name sematext-agent --restart=always -e SPM_TOKEN=MY_TOKEN -e HOSTNAME  -e DOCKER_TLS_VERIFY -e DOCKER_CERT_PATH -e DOCKER_HOST -v $DOCKER_CERT_PATH:$DOCKER_CERT_PATH sematext/sematext-agent-docker
-  ```
-| Parameter / Environment variable | Description|
-|-----------|------------|
-|**Optional Parameters:**| |
-| --privileged | optional, for more details refer to https://docs.docker.com/engine/security/security/ |
-| HOSTNAME_LOOKUP_URL | On Amazon ECS, a [metadata query](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html) must be used to get the instance hostname (e.g. "169.254.169.254/latest/meta-data/local-hostname")|
-| HTTPS_PROXY | URL for a proxy server (behind firewalls)|
-| LOGSENE_URL | URL for bulk inserts into Logsene. Required only for Logsene On-Premises only.|
-| SPM_URL | URL for bulk inserts into SPM. Required only for SPM On-Premises. |
-|**Docker Logs Parameters**| |
-| LOGSENE_TOKEN | Logsene Application Token for logs| 
-|   __Whitelist containers for logging__ | |
-| MATCH_BY_NAME |  regular expression to white list container names |
-| MATCH_BY_IMAGE | regular expression to white list image names |
-|   __Blacklist containers__ | |
-| SKIP_BY_NAME | regular expression to black list container names |
-| SKIP_BY_IMAGE | regular expression to black list image names for logging | 
-| -v /yourpatterns/patterns.yml:/etc/logagent/patterns.yml | to provide custom patterns for log parsing, see [logagent-js](https://github.com/sematext/logagent-js)|
-| -v /tmp:/logsene-log-buffer | a directory to store logs, in case of a network or service outage. Docker Agent deletes this files after successful transmission.|  
-| KUBERNETES | ```1``` enables parsing of container names into the fields kubernetes.pod_name, kubernetes.namespace and kubernetes.container_name |
-| GEOIP_ENABLED | ```true```enables GeoIP lookups in the log parser, default value: ```false```| 
-| MAXMIND_DB_DIR | directory for the Geo-IP lite database, must end with ```/```. Storing the DB in a volume could save downloads for updates after restarts. Using ```/tmp/``` (ramdisk) could speed up Geo-IP lookups (consumes add. ~30 MB main memory).|
+		**Required Parameters:**
+		
+	| Parameter / Environment variable | Description |
+	|-----------|-------------|
+	| SPM_TOKEN | SPM Application Token |
+	| ```-v /var/run/docker.sock ```  | path to the docker socket (optional, if dockerd provides TCP on 2375, see also DOCKER_PORT and DOCKER_HOST paramter) |
+	|**TCP and TLS connection**|If the unix socket is not available Sematext Agent assumes the Container Gateway Address (autodetect) and port 2375 as default (no TLS) - this needs no configuration. In case the Docker Daemon TCP settings are different, you have to configure the TCP settings. The TCP settings can be modified with the following parameters|
+	|DOCKER_HOST| e.g. tcp://ip-reachable-from-container:2375/ - if not set unix:///var/run/docker.sock or if this does not exists tcp://gateway:2375 will be used. In this case you don't need -v to mount /var/run/docker.sock |
+	| DOCKER_PORT | in case Docker TCP connection is used, the agent will use its gateway address (autodetect) with the given DOCKER_PORT|
+	|DOCKER_TLS_VERIFY | 0 or 1|
+	|DOCKER_CERT_PATH | path to your certificate files, mount the path to the countainer with "-v $DOCKER_CERT_PATH:$DOCKER_CERT_PATH" |  
+	
+	Example using docker-machine with [Docker Swarm](https://github.com/sematext/sematext-agent-docker/blob/master/README.md#installation-on-docker-swarm): 
+	  ```
+	  docker-machine env --swarm swarm-master
+	  export DOCKER_TLS_VERIFY="1"
+	  export DOCKER_HOST="tcp://192.168.99.101:3376"
+	  export DOCKER_CERT_PATH="/Users/stefan/.docker/machine/machines/swarm-master"
+	  export DOCKER_MACHINE_NAME="swarm-master"
+	  eval "$(docker-machine env swarm-master)"
+	  docker run -d --name sematext-agent --restart=always -e SPM_TOKEN=MY_TOKEN -e HOSTNAME  -e DOCKER_TLS_VERIFY -e DOCKER_CERT_PATH -e DOCKER_HOST -v $DOCKER_CERT_PATH:$DOCKER_CERT_PATH sematext/sematext-agent-docker
+	  ```
+	| Parameter / Environment variable | Description|
+	|-----------|------------|
+	|**Optional Parameters:**| |
+	| --privileged | optional, for more details refer to https://docs.docker.com/engine/security/security/ |
+	| HOSTNAME_LOOKUP_URL | On Amazon ECS, a [metadata query](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html) must be used to get the instance hostname (e.g. "169.254.169.254/latest/meta-data/local-hostname")|
+	| HTTPS_PROXY | URL for a proxy server (behind firewalls)|
+	| LOGSENE_URL | URL for bulk inserts into Logsene. Required only for Logsene On-Premises only.|
+	| SPM_URL | URL for bulk inserts into SPM. Required only for SPM On-Premises. |
+	|**Docker Logs Parameters**| |
+	| LOGSENE_TOKEN | Logsene Application Token for logs| 
+	|   __Whitelist containers for logging__ | |
+	| MATCH_BY_NAME |  regular expression to white list container names |
+	| MATCH_BY_IMAGE | regular expression to white list image names |
+	|   __Blacklist containers__ | |
+	| SKIP_BY_NAME | regular expression to black list container names |
+	| SKIP_BY_IMAGE | regular expression to black list image names for logging | 
+	| -v /yourpatterns/patterns.yml:/etc/logagent/patterns.yml | to provide custom patterns for log parsing, see [logagent-js](https://github.com/sematext/logagent-js)|
+	| -v /tmp:/logsene-log-buffer | a directory to store logs, in case of a network or service outage. Docker Agent deletes this files after successful transmission.|  
+	| KUBERNETES | ```1``` enables parsing of container names into the fields kubernetes.pod_name, kubernetes.namespace and kubernetes.container_name |
+	| GEOIP_ENABLED | ```true```enables GeoIP lookups in the log parser, default value: ```false```| 
+	| MAXMIND_DB_DIR | directory for the Geo-IP lite database, must end with ```/```. Storing the DB in a volume could save downloads for updates after restarts. Using ```/tmp/``` (ramdisk) could speed up Geo-IP lookups (consumes add. ~30 MB main memory).|
 
 	You’ll see your Docker metrics in SPM after about a minute.
-	
+
 5. Watch metrics, use anomaly detection for alerts, create e-mail reports and [much more ...](http://blog.sematext.com/2015/06/09/docker-monitoring-support/)
 
 ![](https://raw.githubusercontent.com/sematext/sematext-agent-docker/master/docker-overview-spm.png)
