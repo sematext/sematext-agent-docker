@@ -40,13 +40,11 @@ _Gathered information:_
 		docker pull sematext/sematext-agent-docker
 		docker run -d --name sematext-agent-docker -e SPM_TOKEN=YOUR_SPM_TOKEN -e LOGSENE_TOKEN=YOUR_LOGSENE_TOKEN  -e HOSTNAME  -v /var/run/docker.sock:/var/run/docker.sock sematext/sematext-agent-docker
 		# Alternative TCP: default TCP 2375 on 'localhost' (=> container gateway address), -v is not required
-		docker run -d --name sematext-agent-docker -e SPM_TOKEN=YOUR_SPM_TOKEN -e LOGSENE_TOKEN=YOUR_LOGSENE_TOKEN  -e HOSTNAME  sematext/sematext-agent-docker
-		```
-	
-		**Required Parameters:**
+		docker run -d --name sematext-agent-docker -e SPM_TOKEN=YOUR_SPM_TOKEN -e LOGSENE_TOKEN=YOUR_LOGSENE_TOKEN  -e HOSTNAME  sematext/sematext-agent-docker ```
 		
 	| Parameter / Environment variable | Description |
 	|-----------|-------------|
+	|**Required Parameters**| |
 	| SPM_TOKEN | SPM Application Token |
 	| ```-v /var/run/docker.sock ```  | path to the docker socket (optional, if dockerd provides TCP on 2375, see also DOCKER_PORT and DOCKER_HOST paramter) |
 	|**TCP and TLS connection**|If the unix socket is not available Sematext Agent assumes the Container Gateway Address (autodetect) and port 2375 as default (no TLS) - this needs no configuration. In case the Docker Daemon TCP settings are different, you have to configure the TCP settings. The TCP settings can be modified with the following parameters|
