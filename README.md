@@ -1,4 +1,3 @@
-
 # Sematext Docker Agent
 
 [![Sematext Docker ETP partner for Logging](https://sematext.files.wordpress.com/2015/12/docker_etp_program_logo_square.png?w=125&h=124)](http://blog.sematext.com/2015/12/15/docker-logging-partner-sematext-logsene/) 
@@ -22,13 +21,13 @@ _Gathered information:_
 | **Events** |  |
 | Agent Startup Event| server-info – created by spm-agent framework with node.js and OS version info on startup
 |                               | docker-info – Docker Version, API Version, Kernel Version on startup |
-| **Docker Events** | 
-| Container Lifecycle Events| create, exec_create, destroy, export, ...|
-| Container Runtime Events | die, exec_start, kill, pause, restart, start, stop, unpause, ... |
+| **Docker Events** | 
+| Container Lifecycle Events| create, exec_create, destroy, export, ...|
+| Container Runtime Events | die, exec_start, kill, pause, restart, start, stop, unpause, ... |
 |**Docker Logs**
-| default fields | host / IP address, docker_host, container id, container name, image name,  message|
-|  **Log format detection and log parsers**|  NGINX, Apache httpd, Kafka, Solr, HBase, Zookeeper, Cassandra, MySQL, MongoDB, Redis, Elasticsearch, Nsq.io | 
-|                | JSON, Plain Text | 
+| default fields | host / IP address, docker_host, container id, container name, image name,  message|
+|  **Log format detection and log parsers**|  NGINX, Apache httpd, Kafka, Solr, HBase, Zookeeper, Cassandra, MySQL, MongoDB, Redis, Elasticsearch, Nsq.io | 
+|                | JSON, Plain Text | 
 
 ## Installation 
 
@@ -36,20 +35,21 @@ _Gathered information:_
 2. [Create an SPM App](https://apps.sematext.com/spm-reports/registerApplication.do) of type "Docker" and copy the SPM Application Token 
    - For logs (optional) [create a Logsene App](https://apps.sematext.com/logsene-reports/registerApplication.do) to an App Token for [Logsene](http://www.sematext.com/logsene/)  
 3. Run the image 
-	docker pull sematext/sematext-agent-docker
-	docker run -d --name sematext-agent-docker -e SPM_TOKEN=YOUR_SPM_TOKEN -e LOGSENE_TOKEN=YOUR_LOGSENE_TOKEN  -e HOSTNAME  -v /var/run/docker.sock:/var/run/docker.sock sematext/sematext-agent-docker```
+
+   ```docker pull sematext/sematext-agent-docker
+docker run -d --name sematext-agent-docker -e SPM_TOKEN=YOUR_SPM_TOKEN -e LOGSENE_TOKEN=YOUR_LOGSENE_TOKEN  -e HOSTNAME  -v /var/run/docker.sock:/var/run/docker.sock sematext/sematext-agent-docker```
 
    Example using docker-machine with [Docker Swarm](https://github.com/sematext/sematext-agent-docker/blob/master/README.md#installation-on-docker-swarm) and TLS connection: 
 	
-	```sh
-	docker-machine env --swarm swarm-master
-   	# export DOCKER_TLS_VERIFY="1"
-   	# export DOCKER_HOST="tcp://192.168.99.101:3376"
-   	# export DOCKER_CERT_PATH="/Users/stefan/.docker/machine/machines/swarm-master"
-   	# export DOCKER_MACHINE_NAME="swarm-master"
-   	eval "$(docker-machine env swarm-master)"
-   	docker run -d --name sematext-agent --restart=always -e SPM_TOKEN=MY_TOKEN -e HOSTNAME  -e DOCKER_TLS_VERIFY -e DOCKER_CERT_PATH -e DOCKER_HOST -v $DOCKER_CERT_PATH:$DOCKER_CERT_PATH sematext/sematext-agent-docker 
-   	```
+   ```sh
+docker-machine env --swarm swarm-master
+# export DOCKER_TLS_VERIFY="1"
+# export DOCKER_HOST="tcp://192.168.99.101:3376"
+# export DOCKER_CERT_PATH="/Users/stefan/.docker/machine/machines/swarm-master"
+# export DOCKER_MACHINE_NAME="swarm-master"
+eval "$(docker-machine env swarm-master)"
+docker run -d --name sematext-agent --restart=always -e SPM_TOKEN=MY_TOKEN -e HOSTNAME  -e DOCKER_TLS_VERIFY -e DOCKER_CERT_PATH -e DOCKER_HOST -v $DOCKER_CERT_PATH:$DOCKER_CERT_PATH sematext/sematext-agent-docker 
+```
     You’ll see your Docker metrics in SPM after about a minute.
 
 5. Watch metrics, use anomaly detection for alerts, create e-mail reports and [much more ...](http://blog.sematext.com/2015/06/09/docker-monitoring-support/)
