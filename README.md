@@ -67,7 +67,7 @@ Docker Events:
 |**Required Parameters**| |
 | SPM_TOKEN        | SPM Application Token, enables metric and event collection |
 | LOGSENE_TOKEN    | Logsene Application Token enables logging to Logsene, see logging specifc parameters for filter options and Log Routing section to route logs from different containers to separate Logsene applications| 
-| ```-v /var/run/docker.sock ```  | Path to the docker socket (optional, if dockerd provides TCP on 2375, see also DOCKER_PORT and DOCKER_HOST paramter) |
+| ```-v /var/run/docker.sock ```  | Path to the docker socket (optional, if dockerd provides TCP on 2375, see also DOCKER_PORT and DOCKER_HOST parameter) |
 |**TCP and TLS connection** | If the unix socket is not available Sematext Agent assumes the Container Gateway Address (autodetect) and port 2375 as default (no TLS) - this needs no configuration. In case the Docker Daemon TCP settings are different, you have to configure the TCP settings. The TCP settings can be modified with the following parameters|
 |DOCKER_HOST| e.g. tcp://ip-reachable-from-container:2375/ - default value 'unix:///var/run/docker.sock'. When the unix socket is not available the agent tries to connect to tcp://gateway:2375. In case a TCP socket is used there is no need to mount the Docker unix socket as volume |
 | DOCKER_PORT | Sematext Docker Agent will use its gateway address (autodetect) with the given DOCKER_PORT|
