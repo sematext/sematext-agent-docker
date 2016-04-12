@@ -66,7 +66,8 @@ Docker Events:
 | Parameter / Environment variable | Description |
 |-----------|-------------|
 |**Required Parameters**| |
-| SPM_TOKEN | SPM Application Token |
+| SPM_TOKEN | SPM Application Token, enables metric and event collection |
+| LOGSENE_TOKEN | Logsene Application Token enables logging to Logsene, see logging specifc parameters for filter options and Log Routing section to route logs from different containers to separate Logsene applications| 
 | ```-v /var/run/docker.sock ```  | path to the docker socket (optional, if dockerd provides TCP on 2375, see also DOCKER_PORT and DOCKER_HOST paramter) |
 |**TCP and TLS connection**|If the unix socket is not available Sematext Agent assumes the Container Gateway Address (autodetect) and port 2375 as default (no TLS) - this needs no configuration. In case the Docker Daemon TCP settings are different, you have to configure the TCP settings. The TCP settings can be modified with the following parameters|
 |DOCKER_HOST| e.g. tcp://ip-reachable-from-container:2375/ - if not set unix:///var/run/docker.sock or if this does not exists tcp://gateway:2375 will be used. In this case you don't need -v to mount /var/run/docker.sock |
@@ -80,7 +81,6 @@ Docker Events:
 | LOGSENE_URL | URL for bulk inserts into Logsene. Required only for Logsene On-Premises only.|
 | SPM_URL | URL for bulk inserts into SPM. Required only for SPM On-Premises. |
 |**Docker Logs Parameters**| |
-| LOGSENE_TOKEN | Logsene Application Token for logs| 
 |   __Whitelist containers for logging__ | |
 | MATCH_BY_NAME |  regular expression to white list container names |
 | MATCH_BY_IMAGE | regular expression to white list image names |
