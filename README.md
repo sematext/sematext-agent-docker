@@ -36,13 +36,21 @@ _Gathered information:_
 2. [Create an SPM App](https://apps.sematext.com/spm-reports/registerApplication.do) of type "Docker" and copy the SPM Application Token 
    - For logs (optional) [create a Logsene App](https://apps.sematext.com/logsene-reports/registerApplication.do) to an App Token for [Logsene](http://www.sematext.com/logsene/)  
 3. Run the image 
+	docker pull sematext/sematext-agent-docker
+	docker run -d --name sematext-agent-docker -e SPM_TOKEN=YOUR_SPM_TOKEN -e LOGSENE_TOKEN=YOUR_LOGSENE_TOKEN  -e HOSTNAME  -v /var/run/docker.sock:/var/run/docker.sock sematext/sematext-agent-docker```
 
-		```
-		docker pull sematext/sematext-agent-docker
-		docker run -d --name sematext-agent-docker -e SPM_TOKEN=YOUR_SPM_TOKEN -e LOGSENE_TOKEN=YOUR_LOGSENE_TOKEN  -e HOSTNAME  -v /var/run/docker.sock:/var/run/docker.sock sematext/sematext-agent-docker
-		# Alternative TCP: default TCP 2375 on 'localhost' (=> container gateway address), -v is not required
-		docker run -d --name sematext-agent-docker -e SPM_TOKEN=YOUR_SPM_TOKEN -e LOGSENE_TOKEN=YOUR_LOGSENE_TOKEN sematext/sematext-agent-docker ```
-	You’ll see your Docker metrics in SPM after about a minute.
+   Example using docker-machine with [Docker Swarm](https://github.com/sematext/sematext-agent-docker/blob/master/README.md#installation-on-docker-swarm) and TLS connection: 
+	
+	```sh
+	docker-machine env --swarm swarm-master
+   	# export DOCKER_TLS_VERIFY="1"
+   	# export DOCKER_HOST="tcp://192.168.99.101:3376"
+   	# export DOCKER_CERT_PATH="/Users/stefan/.docker/machine/machines/swarm-master"
+   	# export DOCKER_MACHINE_NAME="swarm-master"
+   	eval "$(docker-machine env swarm-master)"
+   	docker run -d --name sematext-agent --restart=always -e SPM_TOKEN=MY_TOKEN -e HOSTNAME  -e DOCKER_TLS_VERIFY -e DOCKER_CERT_PATH -e DOCKER_HOST -v $DOCKER_CERT_PATH:$DOCKER_CERT_PATH sematext/sematext-agent-docker 
+   	```
+    You’ll see your Docker metrics in SPM after about a minute.
 
 5. Watch metrics, use anomaly detection for alerts, create e-mail reports and [much more ...](http://blog.sematext.com/2015/06/09/docker-monitoring-support/)
 
@@ -65,19 +73,6 @@ Docker Events:
 | DOCKER_PORT | in case Docker TCP connection is used, the agent will use its gateway address (autodetect) with the given DOCKER_PORT|
 |DOCKER_TLS_VERIFY | 0 or 1|
 |DOCKER_CERT_PATH | path to your certificate files, mount the path to the countainer with "-v $DOCKER_CERT_PATH:$DOCKER_CERT_PATH" |  
-	
-	Example using docker-machine with [Docker Swarm](https://github.com/sematext/sematext-agent-docker/blob/master/README.md#installation-on-docker-swarm): 
-	  ```
-	  docker-machine env --swarm swarm-master
-	  export DOCKER_TLS_VERIFY="1"
-	  export DOCKER_HOST="tcp://192.168.99.101:3376"
-	  export DOCKER_CERT_PATH="/Users/stefan/.docker/machine/machines/swarm-master"
-	  export DOCKER_MACHINE_NAME="swarm-master"
-	  eval "$(docker-machine env swarm-master)"
-	  docker run -d --name sematext-agent --restart=always -e SPM_TOKEN=MY_TOKEN -e HOSTNAME  -e DOCKER_TLS_VERIFY -e DOCKER_CERT_PATH -e DOCKER_HOST -v $DOCKER_CERT_PATH:$DOCKER_CERT_PATH sematext/sematext-agent-docker
-	  ```
-| Parameter / Environment variable | Description|
-|-----------|------------|
 |**Optional Parameters:**| |
 | --privileged | optional, for more details refer to https://docs.docker.com/engine/security/security/ |
 | HOSTNAME_LOOKUP_URL | On Amazon ECS, a [metadata query](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html) must be used to get the instance hostname (e.g. "169.254.169.254/latest/meta-data/local-hostname")|
