@@ -1,7 +1,8 @@
 #!/bin/sh
 
 set -e
-export spmagent_spmSenderBulkInsertUrl=${SPM_URL:-https://spm-receiver.sematext.com:443/receiver/v1/_bulk}
+export SPM_RECEIVER_URL=${SPM_URL:-$SPM_RECEIVER_URL}
+export spmagent_spmSenderBulkInsertUrl=${SPM_RECEIVER_URL:-https://spm-receiver.sematext.com:443/receiver/v1/_bulk}
 export DOCKER_PORT=${DOCKER_PORT:-2375}
 export LOGSENE_TMP_DIR=/logsene-log-buffer
 # default is /tmp/ but this consumes 70 MB RAM
