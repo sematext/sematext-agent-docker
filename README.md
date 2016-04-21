@@ -77,8 +77,9 @@ Docker Events:
 | --privileged | The parameter might be helpful when Sematext Agent could not start because of limited permission to connect and write to the Docker socket /var/run/docker.sock. The privileged mode is a potential security risk, we recommend to enable the appropriate security. Please read about Docker security: https://docs.docker.com/engine/security/security/ |
 | HOSTNAME_LOOKUP_URL | On Amazon ECS, a [metadata query](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html) must be used to get the instance hostname (e.g. "169.254.169.254/latest/meta-data/local-hostname")|
 | HTTPS_PROXY | URL for a proxy server (behind firewalls)|
-| LOGSENE_URL | URL for bulk inserts into Logsene. Required only for Logsene On-Premises only.|
-| SPM_URL | URL for bulk inserts into SPM. Required only for SPM On-Premises. |
+| LOGSENE_RECEIVER_URL | URL for bulk inserts into Logsene. Required for Logsene On-Premises only.|
+| SPM_RECEIVER_URL | URL for bulk inserts into SPM. Required for SPM On-Premises only. |
+| EVENTS_RECEIVER_URL | URL for SPM events receiver. Required for SPM On-Premises only. |
 |**Docker Logs Parameters**| |
 |   __Whitelist containers for logging__ | |
 | MATCH_BY_NAME |  Regular expression to white list container names |
