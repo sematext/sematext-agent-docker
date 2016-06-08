@@ -9,6 +9,12 @@ export LOGSENE_TMP_DIR=/logsene-log-buffer
 # to speed up GeoIP lookups the directory could be set back to /tmp/
 export MAXMIND_DB_DIR=${MAXMIND_DB_DIR:-/usr/src/app/}
 
+if [ -n "${LOGAGENT_PATTERNS}" ]; then
+  mkdir /etc/logagent
+  echo "writing LOGAGENT_PATTERNS to /etc/logagent/patterns.yml"
+  echo "$LOGAGENT_PATTERNS" > /etc/logagent/patterns.yml
+fi
+
 export GEOIP_DISABLED=${GEOIP_DISABLED:-"true"}
 if [ "$GEOIP_ENABLED" == "true" ]; then
   export GEOIP_DISABLED="false"

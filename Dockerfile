@@ -1,4 +1,4 @@
-FROM alpine:edge
+FROM alpine:3.4
 
 RUN apk --no-cache add \
     tini \
@@ -22,5 +22,5 @@ RUN ln -s /usr/src/app/run.sh /usr/local/bin/run-sematext-agent
 
 EXPOSE 9000
 
-ENTRYPOINT ["tini", "--"]
+ENTRYPOINT ["/sbin/tini", "--"]
 CMD ["run-sematext-agent"]
