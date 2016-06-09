@@ -8,9 +8,11 @@ export LOGSENE_TMP_DIR=/logsene-log-buffer
 # default is /tmp/ but this consumes 70 MB RAM
 # to speed up GeoIP lookups the directory could be set back to /tmp/
 export MAXMIND_DB_DIR=${MAXMIND_DB_DIR:-/usr/src/app/}
+export SPM_COLLECTION_INTERVAL_IN_MS=${SPM_COLLECTION_INTERVAL_IN_MS:-10000}
+export SPM_TRANSMIT_INTERVAL_IN_MS=${SPM_TRANSMIT_INTERVAL_IN_MS:-10000}
 
 if [ -n "${LOGAGENT_PATTERNS}" ]; then
-  mkdir /etc/logagent
+  mkdir -p /etc/logagent
   echo "writing LOGAGENT_PATTERNS to /etc/logagent/patterns.yml"
   echo "$LOGAGENT_PATTERNS" > /etc/logagent/patterns.yml
 fi
