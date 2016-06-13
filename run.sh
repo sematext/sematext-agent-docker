@@ -11,6 +11,12 @@ export MAXMIND_DB_DIR=${MAXMIND_DB_DIR:-/usr/src/app/}
 export SPM_COLLECTION_INTERVAL_IN_MS=${SPM_COLLECTION_INTERVAL_IN_MS:-10000}
 export SPM_TRANSMIT_INTERVAL_IN_MS=${SPM_TRANSMIT_INTERVAL_IN_MS:-10000}
 
+if [ -n "${PATTERNS_URL}" ]; then
+  echo downloading logagent patterns: ${PATTERNS_URL}
+  export LOGAGENT_PATTERNS=$(curl -s ${PATTERNS_URL})
+  # echo "$LOGAGENT_PATTERNS"
+fi
+
 if [ -n "${LOGAGENT_PATTERNS}" ]; then
   mkdir -p /etc/logagent
   echo "writing LOGAGENT_PATTERNS to /etc/logagent/patterns.yml"
@@ -50,5 +56,6 @@ if [ -n "${HOSTNAME_LOOKUP_URL}" ]; then
   export SPM_REPORTED_HOSTNAME=$(curl -s $HOSTNAME_LOOKUP_URL)
   echo "Hostname lookup from ${HOSTNAME_LOOKUP_URL}: ${SPM_REPORTED_HOSTNAME}"
 fi
+
 
 exec sematext-agent-docker ${SPM_TOKEN}
