@@ -20,9 +20,6 @@ RUN apk --no-cache add --virtual deps git \
     /root/.npm
 
 RUN ln -s /usr/src/app/run.sh /usr/local/bin/run-sematext-agent
-RUN cd /usr/lib/node_modules/sematext-agent-docker/node_modules/docker-loghose && npm i megastef/docker-allcontainers
-RUN cd /usr/lib/node_modules/sematext-agent-docker/node_modules/docker-stats && npm i megastef/docker-allcontainers
-RUN cd /usr/lib/node_modules/sematext-agent-docker/node_modules/docker-events && npm i megastef/docker-allcontainers
 
 EXPOSE 9000
 
