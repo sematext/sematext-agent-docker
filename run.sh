@@ -1,5 +1,4 @@
 #!/bin/sh
-
 set -e
 export SPM_RECEIVER_URL=${SPM_URL:-$SPM_RECEIVER_URL}
 export spmagent_spmSenderBulkInsertUrl=${SPM_RECEIVER_URL:-https://spm-receiver.sematext.com:443/receiver/v1/_bulk}
@@ -57,9 +56,5 @@ if [ -n "${HOSTNAME_LOOKUP_URL}" ]; then
   export SPM_REPORTED_HOSTNAME=$(curl -s $HOSTNAME_LOOKUP_URL)
   echo "Hostname lookup from ${HOSTNAME_LOOKUP_URL}: ${SPM_REPORTED_HOSTNAME}"
 fi
-# this is a workaround for missing logs and metrics for SDA container
-# docker-loghose and docker-stats exclude 
-# the own container by comparing container ID with process.env.HOSTNAME 
-# so we can fix the issue on node.js
-export HOSTNAME="$(hostname)_sda"
+
 exec sematext-agent-docker ${SPM_TOKEN}
