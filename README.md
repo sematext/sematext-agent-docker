@@ -72,7 +72,7 @@ Docker Events:
 |DOCKER_HOST| e.g. tcp://ip-reachable-from-container:2375/ - default value 'unix:///var/run/docker.sock'. When the unix socket is not available the agent tries to connect to tcp://gateway:2375. In case a TCP socket is used there is no need to mount the Docker unix socket as volume |
 | DOCKER_PORT | Sematext Docker Agent will use its gateway address (autodetect) with the given DOCKER_PORT|
 |DOCKER_TLS_VERIFY | 0 or 1|
-|DOCKER_CERT_PATH | Path to your certificate files, mount the path to the countainer with "-v $DOCKER_CERT_PATH:$DOCKER_CERT_PATH" |  
+|DOCKER_CERT_PATH | Path to your certificate files, mount the path to the container with "-v $DOCKER_CERT_PATH:$DOCKER_CERT_PATH" |  
 |**Optional Parameters:**| |
 | --privileged | The parameter might be helpful when Sematext Agent could not start because of limited permission to connect and write to the Docker socket /var/run/docker.sock. The privileged mode is a potential security risk, we recommend to enable the appropriate security. Please read about Docker security: https://docs.docker.com/engine/security/security/ |
 | HOSTNAME_LOOKUP_URL | On Amazon ECS, a [metadata query](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html) must be used to get the instance hostname (e.g. "169.254.169.254/latest/meta-data/local-hostname")|
@@ -87,6 +87,9 @@ Docker Events:
 |   __Blacklist containers__ | |
 | SKIP_BY_NAME | Regular expression to black list container names |
 | SKIP_BY_IMAGE | Regular expression to black list image names for logging | 
+| PATTERNS_URL | Load pattern.yml via HTTP e.g. ```-e PATTERNS_URL=https://raw.githubusercontent.com/sematext/logagent-js/master/patterns.yml``` |
+| LOGAGENT_PATTERNS | Pass patterns.yml via env. variable e.g. ```-e LOGAGENT_PATTERNS="$(cat ./patters.yml)"``` |
+| PATTERN_MATCHING_ENABLED | Activate [logagent-js parser](https://sematext.github.io/logagent-js/parser/), default value is ```true```. To disable the log parser set the value to ```false```. This could increase the throughput of log processing for nodes with a very high log volume.|
 | -v /yourpatterns/patterns.yml:/etc/logagent/patterns.yml | to provide custom patterns for log parsing, see [logagent-js](https://github.com/sematext/logagent-js)|
 | -v /tmp:/logsene-log-buffer | Directory to store logs, in case of a network or service outage. Docker Agent deletes this files after successful transmission.|  
 | KUBERNETES | ```1``` enables parsing of container names into the fields kubernetes.pod_name, kubernetes.namespace and kubernetes.container_name |
