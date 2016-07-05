@@ -1,6 +1,6 @@
 {
   "name": "sematext-agent-docker",
-  "version": "1.30.7",
+  "version": "1.30.8",
   "description": "Sematext Docker Agent - Metrics and Log Collection Agent for Docker",
   "main": "lib/index.js",
   "directories": {
@@ -55,7 +55,7 @@
     "line-delimited-json": "megastef/line-delimited-json",
     "lodash": "^3.10.1",
     "logagent-js": "^1.2.6",
-    "logsene-js": "^1.1.7",
+    "logsene-js": "^1.1.14",
     "ls": "^0.1.0",
     "measured": "^1.0.1",
     "minimist": "^1.1.3",
