@@ -147,7 +147,7 @@ Run Sematext Docker Agent as [Kubernetes DaemonSet](http://kubernetes.io/v1.1/do
 2. Run the DaemonSet
 
 ```
-kubectl create -f sematext-agent.yml --validate=false
+kubectl create -f sematext-agent.yml 
 ```
 
 # Installation on Docker Swarm 

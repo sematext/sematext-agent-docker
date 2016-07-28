@@ -9,7 +9,7 @@ spec:
       labels:
         app: sematext-agent
     spec:
-      selector: {}
+      nodeSelector: {}
       dnsPolicy: "ClusterFirst"
       restartPolicy: "Always"
       containers:
@@ -28,6 +28,8 @@ spec:
             name: docker-sock
           - mountPath: /etc/localtime
             name: localtime
+        securityContext:
+          privileged: true
       volumes:
         - name: docker-sock
           hostPath:
