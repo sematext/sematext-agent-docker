@@ -1,5 +1,7 @@
 #!/bin/sh
 set -e
+export SPM_LOG_LEVEL=${SPM_LOG_LEVEL:-error}
+export SPM_LOG_TO_CONSOLE=${SPM_LOG_TO_CONSOLE:-true}
 export SPM_RECEIVER_URL=${SPM_URL:-$SPM_RECEIVER_URL}
 export spmagent_spmSenderBulkInsertUrl=${SPM_RECEIVER_URL:-https://spm-receiver.sematext.com:443/receiver/v1/_bulk}
 export DOCKER_PORT=${DOCKER_PORT:-2375}
