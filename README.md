@@ -95,7 +95,7 @@ Docker Events:
 | KUBERNETES | ```1``` enables parsing of container names into the fields kubernetes.pod_name, kubernetes.namespace and kubernetes.container_name |
 | GEOIP_ENABLED | ```true```enables GeoIP lookups in the log parser, default value: ```false```| 
 | MAXMIND_DB_DIR | Directory for the Geo-IP lite database, must end with ```/```. Storing the DB in a volume could save downloads for updates after restarts. Using ```/tmp/``` (ramdisk) could speed up Geo-IP lookups (consumes add. ~30 MB main memory).|
-|ENABLE_LOGSENE_STATS | Enables logging of tranmission stats to Logsene. Default value 'true'. Provides number of logs received, number of logs shipped, number of failed/successful http tranmissions (bulk requests to Logsene) and re-transmissions of failed requests. |
+|ENABLE_LOGSENE_STATS | Enables logging of tranmission stats to Logsene. Default value 'false'. Provides number of logs received, number of logs shipped, number of failed/successful http tranmissions (bulk requests to Logsene) and re-transmissions of failed requests. |
 
 # Log Routing
 
