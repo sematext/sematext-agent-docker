@@ -27,12 +27,8 @@ if [ -n "${LOGAGENT_PATTERNS}" ]; then
   echo "$LOGAGENT_PATTERNS" > /etc/logagent/patterns.yml
 fi
 
-export GEOIP_DISABLED=${GEOIP_DISABLED:-"true"}
-if [ "$GEOIP_ENABLED" == "true" ]; then
-  export GEOIP_DISABLED="false"
-fi
-
-if [[ "$GEOIP_DISABLED" == "false" && -n "${LOGSENE_TOKEN}" ]]; then
+export GEOIP_ENABLED=${GEOIP_ENABLED:-"false"}
+if [[ "$GEOIP_ENABLED" == "true" && -n "${LOGSENE_TOKEN}" ]]; then
   echo "GeoIP lookups: enabled" 
 fi
 
