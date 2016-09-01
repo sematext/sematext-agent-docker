@@ -38,18 +38,7 @@ _Gathered information:_
    ```docker pull sematext/sematext-agent-docker
 docker run -d --name sematext-agent-docker -e SPM_TOKEN=YOUR_SPM_TOKEN -e LOGSENE_TOKEN=YOUR_LOGSENE_TOKEN  -e HOSTNAME  -v /var/run/docker.sock:/var/run/docker.sock sematext/sematext-agent-docker```
 
-   Example using docker-machine with [Docker Swarm](https://github.com/sematext/sematext-agent-docker/blob/master/README.md#installation-on-docker-swarm) and TLS connection: 
-	
-   ```sh
-docker-machine env --swarm swarm-master
-# export DOCKER_TLS_VERIFY="1"
-# export DOCKER_HOST="tcp://192.168.99.101:3376"
-# export DOCKER_CERT_PATH="/Users/stefan/.docker/machine/machines/swarm-master"
-# export DOCKER_MACHINE_NAME="swarm-master"
-eval "$(docker-machine env swarm-master)"
-docker run -d --name sematext-agent --restart=always -e SPM_TOKEN=MY_TOKEN -e HOSTNAME  -e DOCKER_TLS_VERIFY -e DOCKER_CERT_PATH -e DOCKER_HOST -v $DOCKER_CERT_PATH:$DOCKER_CERT_PATH sematext/sematext-agent-docker 
-```
-    You’ll see your Docker metrics in SPM after about a minute.
+    You’ll see your Docker metrics in SPM after about a minute. 
 
 5. Watch metrics, use anomaly detection for alerts, create e-mail reports and [much more ...](http://blog.sematext.com/2015/06/09/docker-monitoring-support/)
 
@@ -153,7 +142,26 @@ kubectl create -f sematext-agent.yml
 
 # Installation on Docker Swarm 
 
-Please read [Docker Swarm: Collecting Metrics, Events & Logs](http://blog.sematext.com/2016/01/12/docker-swarm-collecting-metrics-events-logs/)
+For Swarm on Docker engine > v1.12 use a global service to deploy the agent to all cluster nodes:
+
+```
+docker service create --mode global --reserve-memory 128mb --restart-condition any \
+--name sematext-agent-docker \
+--mount type=bind,src=/var/run/docker.sock,dst=/var/run/docker.sock \
+-e SPM_TOKEN=YOUR_SPM_TOKEN  \
+-e LOGSENE_TOKEN=YOUR_LOGSENE_TOKEN \
+sematext/sematext-agent-docker 
+```
+
+Adjust the reserved memory to your needs (>70 MB). 
+
+Please read [Docker Swarm: Collecting Metrics, Events & Logs](http://blog.sematext.com/2016/01/12/docker-swarm-collecting-metrics-events-logs/) for previous Swarm versions. 
+
+# Installation on RancherOS  
+
+Please read [RancherOS Monitoring and Logging Support](https://sematext.com/blog/2016/08/31/rancheros-monitoring-and-logging-support/) there are various deployment options for Rancher, Swarm, Kubernetes or Mesos. 
+
+In addition we recommend to read Rancher Labs blog post about the [RancherOS Catalog Entry](http://rancher.com/new-rancher-community-catalog-monitoring-logging-sematext/). 
 
 # Installation on Nomad by Hashicorp
 
