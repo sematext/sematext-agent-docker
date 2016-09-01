@@ -49,7 +49,7 @@
     "adm-zip": "^0.4.7",
     "docker-allcontainers": "^0.6.1",
     "docker-events": "^0.0.2",
-    "docker-loghose": "megastef/docker-loghose",
+    "docker-loghose": "github:megastef/docker-loghose",
     "docker-stats": "^0.7.0",
     "dockerode": "^2.2.8",
     "flat": "^1.5.1",
