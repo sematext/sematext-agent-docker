@@ -1,9 +1,8 @@
-FROM alpine:3.4
+FROM mhart/alpine-node:6
 
 RUN apk --no-cache add \
     git \
     tini \
-    nodejs \
     procps \
     curl \
     coreutils
