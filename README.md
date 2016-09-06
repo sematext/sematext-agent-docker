@@ -88,8 +88,10 @@ Docker Events:
 
 # Log Routing
 
-Routing logs from different containers to separate Logsene Apps can be configured via docker labels. Simply tag a container with the label (or environment variable) ```LOGSENE_TOKEN```. 
+Routing logs from different containers to separate Logsene Apps can be configured via docker labels (or environment variables e.g. on Kubernetes). Simply tag a container with the label (or environment variable) ```LOGSENE_TOKEN=YOUR_LOGSENE_TOKEN```. 
 Sematext Docker Agent inspects the containers for this Label and ships the logs to the defined Logsene App. 
+
+To disable logging to Logsene/Elasticsearch label the application container with ```LOGSENE_ENABLED=false```. ```LOGSENE_ENABLED=true``` enables logging for the container again. 
 
 __Example:__ 
 The following command will start nginx webserver and logs for this container will be shipped to the related Logsene App. 
