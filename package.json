@@ -46,6 +46,7 @@
   },
   "homepage": "http://www.sematext.com",
   "dependencies": {
+    "@sematext/logagent": "^2.0.12",
     "adm-zip": "^0.4.7",
     "docker-allcontainers": "^0.6.1",
     "docker-events": "^0.0.2",
@@ -55,7 +56,6 @@
     "flat": "^1.5.1",
     "line-delimited-json": "megastef/line-delimited-json",
     "lodash": "^3.10.1",
-    "logagent-js": "^1.2.30",
     "logsene-js": "^1.1.23",
     "ls": "^0.1.0",
     "measured": "^1.0.1",
