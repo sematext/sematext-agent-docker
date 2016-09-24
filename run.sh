@@ -8,6 +8,8 @@ export spmagent_spmSenderBulkInsertUrl=${SPM_RECEIVER_URL:-https://spm-receiver.
 export DOCKER_PORT=${DOCKER_PORT:-2375}
 export LOGSENE_TMP_DIR=/logsene-log-buffer
 export MAX_CLIENT_SOCKETS=${MAX_CLIENT_SOCKETS:-1}
+# clean docker inspect cache after 1 minute
+export DOCKER_INSPECT_CACHE_EVICT_TIME=${DOCKER_INSPECT_CACHE_EVICT_TIME:60000}
 
 # default is /tmp/ but this consumes 70 MB RAM
 # to speed up GeoIP lookups the directory could be set back to /tmp/
