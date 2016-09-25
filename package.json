@@ -62,6 +62,7 @@
     "minimist": "^1.2.0",
     "moment": "^2.14.1",
     "request": "^2.74.0",
+    "split2": "^2.1.0",
     "spm-agent": "^1.30.3",
     "spm-agent-os": "^1.30.8",
     "spm-metrics-js": "^1.0.7",
