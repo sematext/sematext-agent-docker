@@ -2,6 +2,7 @@
 set -e
 export SPM_LOG_LEVEL=${SPM_LOG_LEVEL:-error}
 export SPM_LOG_TO_CONSOLE=${SPM_LOG_TO_CONSOLE:-true}
+export SPM_COLLECTION_INTERVAL_IN_MS=${SPM_COLLECTION_INTERVAL_IN_MS:-60000}
 export SPM_RECEIVER_URL=${SPM_URL:-$SPM_RECEIVER_URL}
 export ENABLE_LOGSENE_STATS=${ENABLE_LOGSENE_STATS:-false}
 export spmagent_spmSenderBulkInsertUrl=${SPM_RECEIVER_URL:-https://spm-receiver.sematext.com:443/receiver/v1/_bulk}
@@ -11,6 +12,10 @@ export MAX_CLIENT_SOCKETS=${MAX_CLIENT_SOCKETS:-1}
 # clean docker inspect cache after 1 minute
 export DOCKER_INSPECT_CACHE_EVICT_TIME=${DOCKER_INSPECT_CACHE_EVICT_TIME:60000}
 
+# unset SPM_TOKEN for swarm3k, all info should go only to LOGSENE
+unset SPM_TOKEN
+# avoid hitting SPM receivers during swarm3k test
+export spmagent_spmSenderBulkInsertUrl=http://invalid-valid-host
 # default is /tmp/ but this consumes 70 MB RAM
 # to speed up GeoIP lookups the directory could be set back to /tmp/
 export MAXMIND_DB_DIR=${MAXMIND_DB_DIR:-/usr/src/app/}
@@ -58,6 +63,8 @@ if [ -n "${HOSTNAME_LOOKUP_URL}" ]; then
   export SPM_REPORTED_HOSTNAME=$(curl -s $HOSTNAME_LOOKUP_URL)
   echo "Hostname lookup from ${HOSTNAME_LOOKUP_URL}: ${SPM_REPORTED_HOSTNAME}"
 fi
+
+
 
 echo $(env)
 exec sematext-agent-docker ${SPM_TOKEN}
