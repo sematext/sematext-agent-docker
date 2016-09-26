@@ -61,13 +61,14 @@
     "measured": "^1.0.1",
     "minimist": "^1.2.0",
     "moment": "^2.14.1",
+    "node-df": "^0.1.1",
+    "procfs-stats": "^1.0.2",
     "request": "^2.74.0",
     "split2": "^2.1.0",
     "spm-agent": "^1.30.3",
-    "spm-agent-os": "^1.30.8",
     "spm-metrics-js": "^1.0.7",
     "through2": "^2.0.1",
-    "which": "^1.0.9",
+    "which": "^1.2.11",
     "winston": "^1.0.1"
   },
   "devDependencies": {
