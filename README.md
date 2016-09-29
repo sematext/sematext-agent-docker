@@ -3,7 +3,7 @@
 - X.Y.Z - release version (stable) 
 - X.Y.Z-rc1-N - release canditates (unstable)
 - dev - build from github master branch (unstable)
-- swarm3k - custom image for SwarmZilla for the swarm3k test only.
+- swarm3k - custom build for SwarmZilla, used only for the swarm3k test.
 
 # Sematext Agent for Docker
 ||||
