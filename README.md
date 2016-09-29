@@ -1,9 +1,16 @@
-# Sematext Docker Agent
+# Image tags
+- latest - the latest release (stable)
+- X.Y.Z - release version (stable) 
+- X.Y.Z-rc1-N - release canditates (unstable)
+- dev - build from github master branch (unstable)
+- swarm3k - custom image for SwarmZilla for the swarm3k test only.
+
+# Sematext Agent for Docker
 ||||
 |---|------------|------------|
 | [![Sematext Docker ETP partner for Logging](https://sematext.files.wordpress.com/2015/12/docker_etp_program_logo_square.png?w=125&h=124)](http://blog.sematext.com/2015/12/15/docker-logging-partner-sematext-logsene/) | [![Deploy to Docker Cloud](https://files.cloud.docker.com/images/deploy-to-dockercloud.svg)](https://cloud.docker.com/stack/deploy/?repo=https://github.com/sematext/sematext-agent-docker) | ![build status](https://api.travis-ci.org/sematext/sematext-agent-docker.svg) 
 
-Sematext Docker Agent collects Metrics, Events and Logs from the Docker API for [SPM Docker Monitoring](http://sematext.com/spm/integrations/docker-monitoring.html) & [Logsene / Hosted ELK](http://sematext.com/logsene) Log Management. Works with CoreOS, RancherOS, Docker Swarm, Kubernetes, Apache Mesos, Hashicorp Nomad, Amzon ECS, ... see installation. 
+Sematext Agent for Docker collects Metrics, Events and Logs from the Docker API for [SPM Docker Monitoring](http://sematext.com/spm/integrations/docker-monitoring.html) & [Logsene / Hosted ELK](http://sematext.com/logsene) Log Management. Works with CoreOS, RancherOS, Docker Swarm, Kubernetes, Apache Mesos, Hashicorp Nomad, Amzon ECS, ... see installation. 
 
 _How it works_
 
@@ -59,7 +66,7 @@ Docker Events:
 | ```-v /var/run/docker.sock ```  | Path to the docker socket (optional, if dockerd provides TCP on 2375, see also DOCKER_PORT and DOCKER_HOST parameter) |
 |**TCP and TLS connection** | If the unix socket is not available Sematext Agent assumes the Container Gateway Address (autodetect) and port 2375 as default (no TLS) - this needs no configuration. In case the Docker Daemon TCP settings are different, you have to configure the TCP settings. The TCP settings can be modified with the following parameters|
 |DOCKER_HOST| e.g. tcp://ip-reachable-from-container:2375/ - default value 'unix:///var/run/docker.sock'. When the unix socket is not available the agent tries to connect to tcp://gateway:2375. In case a TCP socket is used there is no need to mount the Docker unix socket as volume |
-| DOCKER_PORT | Sematext Docker Agent will use its gateway address (autodetect) with the given DOCKER_PORT|
+| DOCKER_PORT | Sematext Agent will use its gateway address (autodetect) with the given DOCKER_PORT|
 |DOCKER_TLS_VERIFY | 0 or 1|
 |DOCKER_CERT_PATH | Path to your certificate files, mount the path to the container with "-v $DOCKER_CERT_PATH:$DOCKER_CERT_PATH" |  
 |**Optional Parameters:**| |
@@ -89,7 +96,7 @@ Docker Events:
 # Log Routing
 
 Routing logs from different containers to separate Logsene Apps can be configured via docker labels (or environment variables e.g. on Kubernetes). Simply tag a container with the label (or environment variable) ```LOGSENE_TOKEN=YOUR_LOGSENE_TOKEN```. 
-Sematext Docker Agent inspects the containers for this Label and ships the logs to the defined Logsene App. 
+Sematext Agent inspects the containers for this Label and ships the logs to the defined Logsene App. 
 
 To disable logging to Logsene/Elasticsearch label the application container with ```LOGSENE_ENABLED=false```. ```LOGSENE_ENABLED=true``` enables logging for the container again. 
 
@@ -129,11 +136,11 @@ Feel free to contribute to [logagent-js](https://github.com/sematext/logagent-js
 # Installation on CoreOS Linux
 
 Sematext Agent for Docker can monitor CoreOS clusters including metrics and logs from Docker and journald.   
-See: [Setup Sematext Docker Agent on CoreOS](https://github.com/sematext/sematext-agent-docker/tree/master/coreos)
+See: [Setup Sematext Agent on CoreOS](https://github.com/sematext/sematext-agent-docker/tree/master/coreos)
 
 # Installation on Kubernetes 
 
-Run Sematext Docker Agent as [Kubernetes DaemonSet](http://kubernetes.io/v1.1/docs/admin/daemons.html).
+Run Sematext Agent as [Kubernetes DaemonSet](http://kubernetes.io/v1.1/docs/admin/daemons.html).
 
 1. Create [sematext-agent.yml](https://github.com/sematext/sematext-agent-docker/blob/master/kubernetes/sematext-agent.yml) - and set your SPM and Logsene App Token in the section spec.env.
 2. Run the DaemonSet
