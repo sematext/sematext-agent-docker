@@ -64,7 +64,8 @@ if [ -n "${HOSTNAME_LOOKUP_URL}" ]; then
   echo "Hostname lookup from ${HOSTNAME_LOOKUP_URL}: ${SPM_REPORTED_HOSTNAME}"
 fi
 
-
+# avoid getting logs unprepared - to be changed in fanal version
+unset LOGSENE_TOKEN
 
 echo $(env)
 exec sematext-agent-docker ${SPM_TOKEN}
