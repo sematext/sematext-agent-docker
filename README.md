@@ -142,8 +142,11 @@ See: [Setup Sematext Agent on CoreOS](https://github.com/sematext/sematext-agent
 
 Run Sematext Agent as [Kubernetes DaemonSet](http://kubernetes.io/v1.1/docs/admin/daemons.html).
 
-1. Create [sematext-agent.yml](https://github.com/sematext/sematext-agent-docker/blob/master/kubernetes/sematext-agent.yml) - and set your SPM and Logsene App Token in the section spec.env.
-2. Run the DaemonSet
+1. Get a free account at [sematext.com/spm](https://apps.sematext.com/users-web/register.do)  
+2. [Create an SPM App](https://apps.sematext.com/spm-reports/registerApplication.do) of type "Docker" and copy the SPM Application Token 
+   - For logs (optional) [create a Logsene App](https://apps.sematext.com/logsene-reports/registerApplication.do) to obtain an App Token for [Logsene](http://www.sematext.com/logsene/)
+3. Create [sematext-agent.yml](https://github.com/sematext/sematext-agent-docker/blob/master/kubernetes/sematext-agent.yml) - and set your SPM and Logsene App Token in the section spec.env.
+4. Run the DaemonSet
 
 ```
 kubectl create -f sematext-agent.yml 
