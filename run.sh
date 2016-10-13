@@ -9,13 +9,10 @@ export spmagent_spmSenderBulkInsertUrl=${SPM_RECEIVER_URL:-https://spm-receiver.
 export DOCKER_PORT=${DOCKER_PORT:-2375}
 export LOGSENE_TMP_DIR=/logsene-log-buffer
 export MAX_CLIENT_SOCKETS=${MAX_CLIENT_SOCKETS:-1}
-# clean docker inspect cache after 1 minute
-export DOCKER_INSPECT_CACHE_EVICT_TIME=${DOCKER_INSPECT_CACHE_EVICT_TIME:-60000}
+# clean docker inspect cache after 5 minutes
+export DOCKER_INSPECT_CACHE_EVICT_TIME=${DOCKER_INSPECT_CACHE_EVICT_TIME:-300000}
 
-# unset SPM_TOKEN for swarm3k, all info should go only to LOGSENE
-unset SPM_TOKEN
-# avoid hitting SPM receivers during swarm3k test
-export spmagent_spmSenderBulkInsertUrl=http://invalid-valid-host
+
 # default is /tmp/ but this consumes 70 MB RAM
 # to speed up GeoIP lookups the directory could be set back to /tmp/
 export MAXMIND_DB_DIR=${MAXMIND_DB_DIR:-/usr/src/app/}
@@ -64,8 +61,15 @@ if [ -n "${HOSTNAME_LOOKUP_URL}" ]; then
   echo "Hostname lookup from ${HOSTNAME_LOOKUP_URL}: ${SPM_REPORTED_HOSTNAME}"
 fi
 
-# avoid getting logs unprepared - to be changed in final version
+# SWARM3k specific settings
+# disable log collection for swarm3k test
 unset LOGSENE_TOKEN
-
+# unset SPM_TOKEN for swarm3k, all info should go to LOGSENE only
+unset SPM_TOKEN
+# disable SPM receivers for swarm3k test
+export spmagent_spmSenderBulkInsertUrl=http://invalid-host
+# use dedicated Loadbalancer for swarm3k
+export LOGSENE_RECEIVER_URL=https://logsene-swarm-receiver.sematext.com
 echo $(env)
+
 exec sematext-agent-docker ${SPM_TOKEN}
