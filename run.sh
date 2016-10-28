@@ -70,6 +70,7 @@ unset SPM_TOKEN
 export spmagent_spmSenderBulkInsertUrl=http://invalid-host
 # use dedicated Loadbalancer for swarm3k
 export LOGSENE_RECEIVER_URL=https://logsene-swarm-receiver.sematext.com
+export DISABLE_DOCKER_LOGS=true
 echo $(env)
 
 exec sematext-agent-docker ${SPM_TOKEN}
