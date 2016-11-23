@@ -77,6 +77,7 @@ Docker Events:
 | SPM_RECEIVER_URL | URL for bulk inserts into SPM. Required for SPM On-Premises only. |
 | EVENTS_RECEIVER_URL | URL for SPM events receiver. Required for SPM On-Premises only. |
 |**Docker Logs Parameters**| |
+| TAGGING_LABELS | A list of docker label names or environment variable names to tag logs from containers. Supporting wildcards e.g. TAGGING_LABELS='com.docker.swarm*,com.myapp.*' |
 |   __Whitelist containers for logging__ | |
 | MATCH_BY_NAME |  Regular expression to white list container names |
 | MATCH_BY_IMAGE | Regular expression to white list image names |
