@@ -10,6 +10,7 @@ spec:
         app: sematext-agent
     spec:
       nodeSelector: {}
+      hostNetwork: true
       dnsPolicy: "ClusterFirst"
       restartPolicy: "Always"
       containers:
