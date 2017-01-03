@@ -88,7 +88,7 @@ Docker Events:
 | LOGAGENT_PATTERNS | Pass patterns.yml via env. variable e.g. ```-e LOGAGENT_PATTERNS="$(cat ./patters.yml)"``` |
 | PATTERN_MATCHING_ENABLED | Activate [logagent-js parser](https://sematext.github.io/logagent-js/parser/), default value is ```true```. To disable the log parser set the value to ```false```. This could increase the throughput of log processing for nodes with a very high log volume.|
 | -v /yourpatterns/patterns.yml:/etc/logagent/patterns.yml | to provide custom patterns for log parsing, see [logagent-js](https://github.com/sematext/logagent-js)|
-| -v /tmp:/logsene-log-buffer | Directory to store logs, in case of a network or service outage. Docker Agent deletes this files after successful transmission.|
+| -v /tmp:/logsene-log-buffer | Directory to store logs, in case of a network or service outage. Docker Agent deletes these files after successful transmission.|
 | GEOIP_ENABLED | ```true```enables GeoIP lookups in the log parser, default value: ```false```| 
 | MAXMIND_DB_DIR | Directory for the Geo-IP lite database, must end with ```/```. Storing the DB in a volume could save downloads for updates after restarts. Using ```/tmp/``` (ramdisk) could speed up Geo-IP lookups (consumes add. ~30 MB main memory).|
 |ENABLE_LOGSENE_STATS | Enables logging of tranmission stats to Logsene. Default value 'false'. Provides number of logs received, number of logs shipped, number of failed/successful http tranmissions (bulk requests to Logsene) and re-transmissions of failed requests. |
