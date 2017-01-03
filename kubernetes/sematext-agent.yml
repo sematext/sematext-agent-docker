@@ -22,8 +22,6 @@ spec:
           value: "YOUR_SPM_TOKEN"
         - name: LOGSENE_TOKEN
           value: "YOUR_LOGSENE_TOKEN"
-        - name: KUBERNETES
-          value: "1"
         volumeMounts:
           - mountPath: /var/run/docker.sock
             name: docker-sock
