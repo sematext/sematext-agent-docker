@@ -46,32 +46,31 @@
   },
   "homepage": "http://www.sematext.com",
   "dependencies": {
-    "@sematext/logagent": "^2.0.26",
+    "@sematext/logagent": "^2.0.44",
     "adm-zip": "^0.4.7",
     "docker-allcontainers": "^0.6.1",
     "docker-events": "^0.0.2",
     "docker-loghose": "github:megastef/docker-loghose",
     "docker-stats": "^0.7.0",
-    "dockerode": "^2.2.8",
-    "flat": "^1.5.1",
+    "dockerode": "^2.3.1",
+    "flat": "^2.0.1",
     "line-delimited-json": "megastef/line-delimited-json",
-    "lodash": "^3.10.1",
-    "logsene-js": "^1.1.23",
-    "ls": "^0.1.0",
-    "measured": "^1.0.1",
+    "lodash": "^4.17.4",
+    "logsene-js": "^1.1.37",
+    "ls": "^0.2.1",
+    "measured": "^1.1.0",
     "minimatch": "^3.0.3",
     "minimist": "^1.2.0",
-    "moment": "^2.14.1",
-    "request": "^2.74.0",
-    "spm-agent": "^1.30.3",
-    "spm-agent-os": "^1.30.8",
-    "spm-metrics-js": "^1.0.7",
-    "through2": "^2.0.1",
-    "which": "^1.0.9",
-    "winston": "^1.0.1"
+    "moment": "^2.17.1",
+    "request": "^2.79.0",
+    "spm-agent": "^1.31.3",
+    "spm-agent-os": "^1.30.10",
+    "spm-metrics-js": "^1.0.16",
+    "through2": "^2.0.3",
+    "which": "^1.2.12",
+    "winston": "^2.3.1"
   },
   "devDependencies": {
-    "doxx": "^1.2.6",
-    "mocha": "^2.2.1"
+    "mocha": "^3.2.0"
   }
 }
