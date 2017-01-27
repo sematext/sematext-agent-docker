@@ -15,6 +15,12 @@ export MAXMIND_DB_DIR=${MAXMIND_DB_DIR:-/usr/src/app/}
 export SPM_COLLECTION_INTERVAL_IN_MS=${SPM_COLLECTION_INTERVAL_IN_MS:-10000}
 export SPM_TRANSMIT_INTERVAL_IN_MS=${SPM_TRANSMIT_INTERVAL_IN_MS:-10000}
 
+mkdir -p /opt/spm/
+export SPM_REPORTED_HOSTNAME=$(docker-info Name)
+echo "docker_id=$(echo $(docker-info ID))" > /opt/spm/.docker
+echo "docker_hostname=${SPM_REPORTED_HOSTNAME}" >> /opt/spm/.docker
+chmod 755 /opt/spm/.docker
+
 if [ -n "${PATTERNS_URL}" ]; then
   echo downloading logagent patterns: ${PATTERNS_URL}
   export LOGAGENT_PATTERNS=$(curl -s ${PATTERNS_URL})
@@ -43,8 +49,6 @@ if [ -z "${DOCKER_HOST}" ]; then
   fi
 fi
 
-export SPM_REPORTED_HOSTNAME=$(docker-info Name)
-echo "Docker Hostname: ${SPM_REPORTED_HOSTNAME}"
 
 if [ -n "${DOCKERCLOUD_NODE_HOSTNAME}" ]; then
   export SPM_REPORTED_HOSTNAME=$DOCKERCLOUD_NODE_HOSTNAME
@@ -56,6 +60,7 @@ if [ -n "${HOSTNAME_LOOKUP_URL}" ]; then
   export SPM_REPORTED_HOSTNAME=$(curl -s $HOSTNAME_LOOKUP_URL)
   echo "Hostname lookup from ${HOSTNAME_LOOKUP_URL}: ${SPM_REPORTED_HOSTNAME}"
 fi
+echo "Docker Hostname: ${SPM_REPORTED_HOSTNAME}"
 
 echo $(env)
 exec sematext-agent-docker ${SPM_TOKEN}
