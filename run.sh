@@ -57,5 +57,11 @@ if [ -n "${HOSTNAME_LOOKUP_URL}" ]; then
   echo "Hostname lookup from ${HOSTNAME_LOOKUP_URL}: ${SPM_REPORTED_HOSTNAME}"
 fi
 
+mkdir -p /opt/spm
+echo "docker_id=$(echo $(docker-info ID))" > /opt/spm/.docker
+echo "docker_hostname=${SPM_REPORTED_HOSTNAME}" >> /opt/spm/.docker
+cat /opt/spm/.docker
+chmod 555 /opt/spm/.docker
+
 echo $(env)
 exec sematext-agent-docker ${SPM_TOKEN}
