@@ -46,7 +46,7 @@
   },
   "homepage": "http://www.sematext.com",
   "dependencies": {
-    "@sematext/logagent": "^2.0.44",
+    "@sematext/logagent": "github:sematext/logagent-js",
     "adm-zip": "^0.4.7",
     "docker-allcontainers": "^0.6.1",
     "docker-events": "^0.0.2",
