@@ -4,7 +4,7 @@ set -e
 # check docker secrets volume 
 export CONFIG_FILE=${CONFIG_FILE:-/run/secrets/sematext-agent}
 set -o allexport
-if [ -f $SPM_CONFIG_FILE]
+if [ -f $CONFIG_FILE]
 then
   echo "Reading configuration from file: ${CONFIG_FILE}"
   source $CONFIG_FILE
