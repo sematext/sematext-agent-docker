@@ -1,5 +1,15 @@
 #!/bin/sh
 set -e
+
+# check docker secrets volume 
+export CONFIG_FILE=${CONFIG_FILE:-/run/secrets/sematext-agent}
+set -o allexport
+if [ -f $SPM_CONFIG_FILE]
+then
+  echo "Reading configuration from file: ${CONFIG_FILE}"
+  source $CONFIG_FILE
+fi
+
 export SPM_LOG_LEVEL=${SPM_LOG_LEVEL:-error}
 export SPM_LOG_TO_CONSOLE=${SPM_LOG_TO_CONSOLE:-true}
 export SPM_RECEIVER_URL=${SPM_URL:-$SPM_RECEIVER_URL}

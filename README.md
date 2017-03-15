@@ -69,6 +69,8 @@ Docker Events:
 | DOCKER_PORT | Sematext Agent will use its gateway address (autodetect) with the given DOCKER_PORT|
 |DOCKER_TLS_VERIFY | 0 or 1|
 |DOCKER_CERT_PATH | Path to your certificate files, mount the path to the container with "-v $DOCKER_CERT_PATH:$DOCKER_CERT_PATH" |  
+|**Configuration via docker swarm secrets:**| |
+| CONFIG_FILE| Path to the configuration file, containing environment variables `key=value`. Default value: `/run/secrets/sematext-agent`. Create a secret with `cat sematext-agent.cfg | docker secret create sematext-agent -`. Start Sematext Docker agent with `docker service create --mode global --secret sematext-agent --mount type=bind,src=/var/run/docker.sock,dst=/var/run/docker.sock sematext/sematext-agent-docker |
 |**Optional Parameters:**| |
 | --privileged | The parameter might be helpful when Sematext Agent could not start because of limited permission to connect and write to the Docker socket /var/run/docker.sock. The privileged mode is a potential security risk, we recommend to enable the appropriate security. Please read about Docker security: https://docs.docker.com/engine/security/security/ |
 | HOSTNAME_LOOKUP_URL | On Amazon ECS, a [metadata query](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html) must be used to get the instance hostname (e.g. "169.254.169.254/latest/meta-data/local-hostname")|
