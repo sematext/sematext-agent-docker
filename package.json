@@ -1,6 +1,6 @@
 {
   "name": "sematext-agent-docker",
-  "version": "1.31.19",
+  "version": "1.31.20",
   "description": "Sematext Docker Agent - Metrics and Log Collection Agent for Docker",
   "main": "lib/index.js",
   "directories": {
