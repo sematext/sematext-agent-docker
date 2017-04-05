@@ -1,0 +1,16 @@
+# docker-compose.yml
+sematext-agent:
+  image: 'sematext/sematext-agent-docker:latest'
+  environment:
+    - LOGSENE_TOKEN=TEST_TOKEN 
+    - SPM_TOKEN=TEST_TOKEN2
+    - affinity:container!=*sematext-agent*
+  privileged: true
+  restart: always
+  volumes:
+    - '/var/run/docker.sock:/var/run/docker.sock'
+
+nginx:
+  image: nginx
+  ports:
+    - 9999:80
