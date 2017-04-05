@@ -15,7 +15,7 @@ function log_count_test ()
 	# each nginx request generates 2 logs
 	export result=$(expr $count  - $LOG_NO \* 50 \* 2)
 	if [ $result == 0 ]; then
-		echo SUCESS $count $result
+		echo SUCCESS $count $result
 	else
 		echo failed: $count $result
 	fi 	
