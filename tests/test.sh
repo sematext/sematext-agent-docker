@@ -9,16 +9,18 @@ fi
 
 function log_count_test () 
 {
-	# generate random test ID
-	export TEST_ID=TEST$(awk -v min=1000 -v max=900000 'BEGIN{srand(); print int(min+rand()*(max-min+1))}')$(awk -v min=1000 -v max=900000 'BEGIN{srand(); print int(min+rand()*(max-min+1))}')
-	echo testID = $TEST_ID
 	export NGINX_PORT=9998
   docker rm -f sematext-agent > /dev/null
 	docker rm -f nginx1  > /dev/null
   docker run -d --name sematext-agent -e ENABLE_LOGSENE_STATS="true" -e MATCH_BY_IMAGE="nginx" -e LOGSENE_TOKEN=$LOGSENE_TOKEN -e SPM_TOKEN=$SPM_TOKEN -v /var/run/docker.sock:/var/run/docker.sock sematext/sematext-agent-docker:test
-  docker run -d --name nginx1 -p $NGINX_PORT:80 nginx  
-	docker run --rm -t --net=host jstarcher/siege -r 8 -c 25 http://127.0.0.1:$NGINX_PORT/${TEST_ID} | grep Transactions
-	sleep 120 
+  # use NGINX container ID as test ID
+  export TEST_ID=$(docker run -d --name nginx1 -p $NGINX_PORT:80 nginx)  
+	echo TEST_ID = $TEST_ID
+  sleep 20 
+  docker run --rm -t --net=host jstarcher/siege -r 5 -c 50 http://127.0.0.1:$NGINX_PORT/${TEST_ID} | grep Transactions
+	docker logs -f sematext-agent &
+	sleep 60 
+	docker stop sematext-agent 
 	echo '{"query" : { "query_string" : {"query": "path:'$TEST_ID' AND status_code:404" }}}' > query.txt
 	echo curl -XPOST "https://logsene-receiver.sematext.com/$LOGSENE_TOKEN/_count" -d @query.txt
 	echo Elasticsearch Query: 
@@ -26,7 +28,7 @@ function log_count_test ()
 	export count=$(curl -XPOST "logsene-receiver.sematext.com/$LOGSENE_TOKEN/_count" -d @query.txt | jq '.count')
 	echo "log count in Logsene: $count"
 	# each nginx request generates 2 logs
-	export generated_logs=200
+	export generated_logs=250
 	echo $generated_logs
 	export result=$(expr $count  - $generated_logs)
 	if [ $result == 0 ]; then
