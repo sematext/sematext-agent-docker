@@ -12,7 +12,7 @@
     "spm-client-diagnostics": "bin/spm-client-diagnostics.js"
   },
   "scripts": {
-    "test": "bash -c 'cd tests && ./test.sh'",
+    "test": "bash -c 'cd tests && ./test.sh build'",
     "build": "docker build -t sematext/sematext-agent-docker:latest .",
     "doc": "doxx --source . -i node_modules,spmlog,spmdb -t \"SPM Agent\" ./docs"
   },
