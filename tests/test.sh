@@ -1,16 +1,18 @@
+#!/bin/bash
 # read tokens from local env.sh 
 if [ "$1" == "build" ]; then
-	docker build -t sematext/sematext-agent-docker:test ..
+	docker build -t "sematext/sematext-agent-docker:test" ..
 fi
-
-source ./env.sh
+if [ -f "env.sh" ]; then
+  source ./env.sh
+fi
 # read nginx port from docker-compose file
 export PORT=$(cat ./docker-compose.yml | grep :80 | awk '{print $2}' | tr : ' ' | awk '{print $1}')
 docker-compose up -d 
 function log_count_test () 
 {
 	# generate random test ID
-	export TEST_ID=TEST$(jot  -r 1 1000 900000)$(jot  -r 1 1000 900000)
+	export TEST_ID=TEST$(awk -v min=1000 -v max=900000 'BEGIN{srand(); print int(min+rand()*(max-min+1))}')$(awk -v min=1000 -v max=900000 'BEGIN{srand(); print int(min+rand()*(max-min+1))}')
 	echo testID = $TEST_ID
 	export LOG_NO=5
 	docker run --rm -t --net=host jstarcher/siege -r $LOG_NO -c 50 http://127.0.0.1:$PORT/${TEST_ID} | grep Transactions
