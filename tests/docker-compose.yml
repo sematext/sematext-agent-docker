@@ -1,9 +1,9 @@
 # docker-compose.yml
 sematext-agent:
-  image: 'sematext/sematext-agent-docker:latest'
+  image: 'sematext/sematext-agent-docker:test'
   environment:
-    - LOGSENE_TOKEN=TEST_TOKEN 
-    - SPM_TOKEN=TEST_TOKEN2
+    - LOGSENE_TOKEN=$LOGSENE_TOKEN
+    - SPM_TOKEN=$SPM_TOKEN
     - affinity:container!=*sematext-agent*
   privileged: true
   restart: always
