@@ -8,7 +8,7 @@ if [ -f "env.sh" ]; then
 fi
 export NGINX_PORT=9998
 # docker rm -f sematext-agent
-docker run -d --name sematext-agent -e LOGSNE_TOKEN -e SPM_TOKEN -v /var/run/docker.sock:/var/run/docker.sock sematext/sematext-agent-docker:test
+docker run -d --name sematext-agent -e LOGSENE_TOKEN=$LOGSENE_TOKEN -e SPM_TOKEN=$SPM_TOKEN -v /var/run/docker.sock:/var/run/docker.sock sematext/sematext-agent-docker:test
 docker run -d -p $NGINX_PORT:80 nginx  
 function log_count_test () 
 {
