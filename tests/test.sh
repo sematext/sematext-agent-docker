@@ -17,7 +17,7 @@ function log_count_test ()
 	echo testID = $TEST_ID
 	export LOG_NO=5
 	docker run --rm -t --net=host jstarcher/siege -r $LOG_NO -c 50 http://127.0.0.1:$NGINX_PORT/${TEST_ID} | grep Transactions
-	sleep 40 
+	sleep 60 
 	echo '{"query" : { "query_string" : {"query": "path:'$TEST_ID' AND status_code:404" }}}' > query.txt
 	echo curl -XPOST "https://logsene-receiver.sematext.com/LOGSENE_TOKEN/_count?q=path:?$TEST_ID" -d @query.txt
 	export count=$(curl -XPOST "logsene-receiver.sematext.com/$LOGSENE_TOKEN/_count?q=path:?$TEST_ID" -d @query.txt | jq '.count')
