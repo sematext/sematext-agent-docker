@@ -20,7 +20,6 @@ function log_count_test ()
   docker run --rm -t --net=host jstarcher/siege -r 5 -c 50 http://127.0.0.1:$NGINX_PORT/${TEST_ID} | grep Transactions
 	# docker logs -f sematext-agent &
 	sleep 60 
-	# docker stop sematext-agent 
 	echo '{"query" : { "query_string" : {"query": "path:'$TEST_ID' AND status_code:404" }}}' > query.txt
 	echo curl -XPOST "https://logsene-receiver.sematext.com/$LOGSENE_TOKEN/_count" -d @query.txt
 	echo Elasticsearch Query: 
@@ -41,7 +40,7 @@ function log_count_test ()
 
 function container_count () 
 {
-	 docker run -d --name nginx2
+	 docker run -d --name nginx2 nginx
 	 sleep 5
 	 docker rm -f nginx2	 
 	 sleep 25  # wait for reporting in SDA console ...
