@@ -12,6 +12,7 @@ function log_count_test ()
 	export NGINX_PORT=9998
   docker rm -f sematext-agent > /dev/null
 	docker rm -f nginx1  > /dev/null
+	docker pull jstarcher/siege > /dev/null  
   docker run -d --name sematext-agent -e SPM_TOKEN -e SPM_LOG_LEVEL="debug" -e SPM_LOG_TO_CONSOLE="1" -e ENABLE_LOGSENE_STATS="true" -e MATCH_BY_IMAGE="nginx" -e LOGSENE_TOKEN=$LOGSENE_TOKEN -e SPM_TOKEN=$SPM_TOKEN -v /var/run/docker.sock:/var/run/docker.sock sematext/sematext-agent-docker:test
   # use NGINX container ID as test ID
   export TEST_ID=$(docker run -d --name nginx1 -p $NGINX_PORT:80 nginx)  
@@ -20,7 +21,7 @@ function log_count_test ()
   docker run --rm -t --net=host jstarcher/siege -r 5 -c 50 http://127.0.0.1:$NGINX_PORT/${TEST_ID} | grep Transactions
 	# docker logs -f sematext-agent &
 	sleep 60 
-	echo '{"query" : { "query_string" : {"query": "path:'$TEST_ID' AND status_code:404" }}}' > query.txt
+	echo '{"query" : { "query_string" : {"query": "message:'$TEST_ID' AND status_code:404" }}}' > query.txt
 	echo curl -XPOST "https://logsene-receiver.sematext.com/$LOGSENE_TOKEN/_count" -d @query.txt
 	echo Elasticsearch Query: 
 	cat query.txt
@@ -75,6 +76,3 @@ function run_tests ()
 }
 
 run_tests
-
-
-
