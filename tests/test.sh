@@ -1,8 +1,10 @@
 #!/bin/bash
-# read tokens from local env.sh 
+
 if [ "$1" == "build" ]; then
 	docker build -t "sematext/sematext-agent-docker:test" ..
 fi
+
+# read tokens from local env.sh 
 if [ -f "env.sh" ]; then
   source ./env.sh
 fi
@@ -12,7 +14,8 @@ function log_count_test ()
 	export NGINX_PORT=9998
   docker rm -f sematext-agent > /dev/null
 	docker rm -f nginx1  > /dev/null
-	docker pull jstarcher/siege > /dev/null  
+	docker pull jstarcher/siege > /dev/null 
+	docker pull nginx > /dev/null   
   docker run -d --name sematext-agent -e SPM_TOKEN -e SPM_LOG_LEVEL="debug" -e SPM_LOG_TO_CONSOLE="1" -e ENABLE_LOGSENE_STATS="true" -e MATCH_BY_IMAGE="nginx" -e LOGSENE_TOKEN=$LOGSENE_TOKEN -e SPM_TOKEN=$SPM_TOKEN -v /var/run/docker.sock:/var/run/docker.sock sematext/sematext-agent-docker:test
   # use NGINX container ID as test ID
   export TEST_ID=$(docker run -d --name nginx1 -p $NGINX_PORT:80 nginx)  
