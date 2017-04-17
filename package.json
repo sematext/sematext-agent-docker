@@ -52,7 +52,7 @@
     "docker-allcontainers": "^0.6.1",
     "docker-events": "^0.0.2",
     "docker-loghose": "github:megastef/docker-loghose",
-    "docker-stats": "^0.7.1",
+    "docker-stats": "^0.7.2",
     "dockerode": "^2.3.1",
     "flat": "^2.0.1",
     "line-delimited-json": "megastef/line-delimited-json",
