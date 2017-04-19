@@ -56,6 +56,6 @@ function createZipFile () {
   var archFileName = path.join(os.tmpdir(), 'spm-diagnose.zip')
   zip.writeZip(archFileName)
   console.log('SPM diagnostics info is in  ' + archFileName)
-  console.log('Please e-mail the file to spm-support@sematext.com')
+  console.log('Please e-mail the file to support@sematext.com')
   fs.unlink(cfgDumpFileName, function () {})
 }
