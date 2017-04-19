@@ -18,31 +18,44 @@ var os = require('os')
 var path = require('path')
 
 var dockerInfo = {}
-
+var systemInfo = {}
+function printDockerInfo (err, info) {
+  if (!err) {
+    dockerInfo.dockerInfo = info
+  }
+  createZipFile()
+}
 try {
-	dockerInfo = fs.statSync ('/var/run/docker.sock')
+  dockerInfo.socketDetails = fs.statSync('/var/run/docker.sock')
+  systemInfo = {
+    operatingSystem: os.type() + ', ' + os.platform() + ', ' + os.release() + ', ' + os.arch(),
+    processVersions: process.versions,
+    processEnvironment: process.env,
+    dockerInfo: dockerInfo
+  }
+  var Docker = require('dockerode')
+  var docker = new Docker()
+  docker.info(printDockerInfo)
 } catch (ex) {
-	dockerInfo = ex
-}
-var systemInfo = {
-  operatingSystem: os.type() + ', ' + os.platform() + ', ' + os.release() + ', ' + os.arch(),
-  processVersions: process.versions,
-  processEnvironment: process.env,
-  dockerSocketInfo: dockerInfo
+  dockerInfo = ex
+  console.log(ex)
+  createZipFile()
 }
 
-var cfgDumpFileName = path.join(os.tmpdir(), 'spm-cfg-dump.txt')
-fs.writeFileSync(cfgDumpFileName, util.inspect(config).toString() + '\nSystem-Info:\n' + util.inspect(systemInfo))
-console.log(util.inspect(config).toString() + '\nSystem-Info:\n' + util.inspect(systemInfo))
-var logfiles = ls(config.logger.dir + '/*')
-zip.addLocalFile(cfgDumpFileName)
-console.log ('Adding file ' + cfgDumpFileName)
-logfiles.forEach(function (f) {
-  console.log ('Adding file ' + f.file )
-  zip.addLocalFile(f.full)
-})
-var archFileName = path.join(os.tmpdir(), 'spm-diagnose.zip')
-zip.writeZip(archFileName)
-console.log('SPM diagnostics info is in  ' + archFileName)
-console.log('Please e-mail the file to spm-support@sematext.com')
-fs.unlink(cfgDumpFileName, function () {})
+function createZipFile () {
+  var cfgDumpFileName = path.join(os.tmpdir(), 'spm-cfg-dump.txt')
+  var logfiles = ls(config.logger.dir + '/*')
+  console.log('Adding file ' + cfgDumpFileName)
+  logfiles.forEach(function (f) {
+    console.log('Adding file ' + f.file)
+    zip.addLocalFile(f.full)
+  })
+  console.log(util.inspect(config).toString() + '\nSystem-Info:\n' + util.inspect(systemInfo))
+  fs.writeFileSync(cfgDumpFileName, util.inspect(config).toString() + '\nSystem-Info:\n' + util.inspect(systemInfo))
+  zip.addLocalFile(cfgDumpFileName)
+  var archFileName = path.join(os.tmpdir(), 'spm-diagnose.zip')
+  zip.writeZip(archFileName)
+  console.log('SPM diagnostics info is in  ' + archFileName)
+  console.log('Please e-mail the file to spm-support@sematext.com')
+  fs.unlink(cfgDumpFileName, function () {})
+}
