@@ -50,7 +50,7 @@ function createZipFile () {
     console.log('Adding file ' + f.file)
     zip.addLocalFile(f.full)
   })
-  console.log(util.inspect(config).toString() + '\nSystem-Info:\n' + util.inspect(systemInfo))
+  console.log(util.inspect(config).toString() + '\nSystem-Info:\n' + util.inspect(systemInfo, {depth:10}))
   fs.writeFileSync(cfgDumpFileName, util.inspect(config).toString() + '\nSystem-Info:\n' + util.inspect(systemInfo))
   zip.addLocalFile(cfgDumpFileName)
   var archFileName = path.join(os.tmpdir(), 'spm-diagnose.zip')
