@@ -56,7 +56,7 @@ function createZipFile () {
   var archFileName = path.join(os.tmpdir(), 'sematext-diagnose.zip')
   zip.writeZip(archFileName)
   console.log('Sematext diagnostics info is in  ' + archFileName)
-  console.log('Copy the file with "docker cp sematext-agent:' + archFileName + ' ." to your docker host')
+  console.log('Run "docker cp sematext-agent:' + archFileName + ' ." to copy the file to the docker host')
   console.log('Please e-mail the file to support@sematext.com')
   fs.unlink(cfgDumpFileName, function () {})
 }
