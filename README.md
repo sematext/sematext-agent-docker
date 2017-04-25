@@ -41,10 +41,12 @@ _Gathered information:_
 1. Get a free account at [sematext.com/spm](https://apps.sematext.com/users-web/register.do)  
 2. [Create an SPM App](https://apps.sematext.com/spm-reports/registerApplication.do) of type "Docker" and copy the SPM Application Token 
    - For logs (optional) [create a Logsene App](https://apps.sematext.com/logsene-reports/registerApplication.do) to obtain an App Token for [Logsene](http://www.sematext.com/logsene/)  
-3. Run the image 
+3. Run the image (please use your individual SPM and Logsene token!)
 
-   ```docker pull sematext/sematext-agent-docker
-docker run -d --name sematext-agent-docker -e SPM_TOKEN=YOUR_SPM_TOKEN -e LOGSENE_TOKEN=YOUR_LOGSENE_TOKEN  -e HOSTNAME  -v /var/run/docker.sock:/var/run/docker.sock sematext/sematext-agent-docker```
+   ```
+   docker pull sematext/sematext-agent-docker
+   docker run -d --name sematext-agent-docker -e SPM_TOKEN=YOUR_SPM_TOKEN -e LOGSENE_TOKEN=YOUR_LOGSENE_TOKEN -v /var/run/docker.sock:/var/run/docker.sock sematext/sematext-agent-docker
+   ```
 
     You’ll see your Docker metrics in SPM after about a minute. 
 
