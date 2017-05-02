@@ -9,7 +9,8 @@
   "bin": {
     "sematext-agent-docker": "lib/index.js",
     "docker-info": "bin/docker-info.js",
-    "spm-client-diagnostics": "bin/spm-client-diagnostics.js"
+    "spm-client-diagnostics": "bin/spm-client-diagnostics.sh",
+    "spm-client-diagnostics-js": "bin/spm-client-diagnostics.js"
   },
   "scripts": {
     "test": "bash -c 'cd tests && ./test.sh build'",
