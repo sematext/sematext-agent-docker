@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 mkdir spmlogs > /dev/null
 node_modules/docker-stats/stats.js > ./spmlogs/raw-metrics.log & pid=$!
 sleep 2 && kill $pid
