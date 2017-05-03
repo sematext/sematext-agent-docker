@@ -5,7 +5,8 @@ RUN apk --no-cache add \
     tini \
     procps \
     curl \
-    coreutils
+    coreutils \
+    bash
 
 COPY . /usr/src/app
 WORKDIR /usr/src/app
