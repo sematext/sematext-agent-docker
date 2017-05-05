@@ -14,11 +14,12 @@ export SPM_LOG_LEVEL=${SPM_LOG_LEVEL:-error}
 export SPM_LOG_TO_CONSOLE=${SPM_LOG_TO_CONSOLE:-true}
 export SPM_RECEIVER_URL=${SPM_URL:-$SPM_RECEIVER_URL}
 export ENABLE_LOGSENE_STATS=${ENABLE_LOGSENE_STATS:-false}
-export spmagent_spmSenderBulkInsertUrl=${SPM_RECEIVER_URL:-https://spm-receiver.sematext.com:443/receiver/v1/_bulk}
+export SPM_RECEIVER_URL=${SPM_RECEIVER_URL:-https://spm-receiver.sematext.com:443/receiver/v1/_bulk}
 export DOCKER_PORT=${DOCKER_PORT:-2375}
 export LOGSENE_TMP_DIR=/logsene-log-buffer
 export MAX_CLIENT_SOCKETS=${MAX_CLIENT_SOCKETS:-1}
 export LOGSENE_ENABLED_DEFAULT=${LOGSENE_ENABLED_DEFAULT:-true}
+
 export ENABLE_AUTODETECT_SEVERITY=${ENABLE_AUTODETECT_SEVERITY:-true}
 # default is /tmp/ but this consumes 70 MB RAM
 # to speed up GeoIP lookups the directory could be set back to /tmp/
