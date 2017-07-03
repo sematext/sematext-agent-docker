@@ -23,8 +23,14 @@ function log()
 log nslookup logsene-receiver.sematext.com 
 log curl -vvv logsene-receiver.sematext.com 
 
+log nslookup logsene-receiver.eu.sematext.com 
+log curl -vvv logsene-receiver.eu.sematext.com 
+
 log nslookup spm-receiver.sematext.com 
 log curl -vvv http://spm-receiver.sematext.com/receiver/isAlive 
+
+log nslookup spm-receiver.eu.sematext.com 
+log curl -vvv http://spm-receiver.eu.sematext.com/receiver/isAlive 
 
 log ifconfig 
 cat $NETWORK_LOG_FILE
