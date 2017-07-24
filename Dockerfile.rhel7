@@ -1,0 +1,30 @@
+FROM registry.access.redhat.com/rhel7/rhel
+WORKDIR /usr/src/app
+USER root
+ENV TINI_VERSION v0.15.0
+# To use subscription inside container yum command has to be run first (before yum-config-manager)
+# https://access.redhat.com/solutions/1443553
+RUN yum repolist > /dev/null && \
+    yum-config-manager --enable rhel-server-rhscl-7-rpms && \
+    yum-config-manager --enable rhel-7-server-optional-rpms && \
+    yum-config-manager --enable rhel-7-server-ose-3.2-rpms && \
+    yum-config-manager --disable epel >/dev/null 
+# Setup Node.js 
+RUN yum install -y gcc-c++ make git
+RUN curl --silent --location https://rpm.nodesource.com/setup_6.x | bash -
+RUN yum install -y nodejs
+COPY . /usr/src/app
+RUN npm install -g 
+RUN ln -s /usr/src/app/run.sh /usr/local/bin/run-sematext-agent
+# Setup tini https://github.com/krallin/tini
+ENV TINI_VERSION v0.15.0
+ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /sbin/tini
+ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini.asc /sbin/tini.asc
+RUN gpg --keyserver ha.pool.sks-keyservers.net --recv-keys 595E85A6B1B4779EA4DAAEC70B588DFF0527A9B7 \
+ && gpg --verify /sbin/tini.asc && chmod +x /sbin/tini
+RUN yum clean all
+EXPOSE 9000
+
+ENTRYPOINT ["/sbin/tini", "--"]
+CMD ["run-sematext-agent"]
+
