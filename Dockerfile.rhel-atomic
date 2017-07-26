@@ -1,4 +1,3 @@
-#FROM registry.access.redhat.com/rhel7/rhel-atomic
 FROM registry.access.redhat.com/rhel-atomic
 MAINTAINER Sematext Group Inc. <redhat@sematext.com>
 ### Atomic/OpenShift Labels - https://github.com/projectatomic/ContainerApplicationGenericLabels
@@ -19,25 +18,43 @@ RUN mkdir /licenses
 COPY ./LICENSE /licenses/LICENSE
 COPY README.md /tmp/help.md
 
-WORKDIR /usr/src/app
+### Setup user for build execution and application runtime
+ENV APP_ROOT=/opt/spm \
+    USER_NAME=default \
+    USER_UID=10001
+
 # Setup Node.js 
 RUN microdnf install  gcc-c++ make git --enablerepo=rhel-7-server-rpms && microdnf clean all
-# --enablerepo=rhel-7-server-optional-rpms 
 RUN curl --silent --location https://rpm.nodesource.com/setup_6.x | bash -
-RUN microdnf install -y nodejs
-COPY . /usr/src/app
+RUN microdnf install -y nodejs && microdnf clean all
+
+### Setup user for build execution and application runtime
+ENV APP_ROOT=/opt/spm \
+    USER_NAME=default \
+    USER_UID=10001
+
+COPY . ${APP_ROOT}
+WORKDIR ${APP_ROOT}
+
 RUN npm install -g 
-RUN ln -s /usr/src/app/run.sh /usr/local/bin/run-sematext-agent
+
+ENV APP_HOME=${APP_ROOT}/src  PATH=$PATH:${APP_ROOT}/bin
+RUN mkdir -p ${APP_HOME} && mkdir -p /logsene-log-buffer && mkdir -p /opt/spm
 # Setup tini https://github.com/krallin/tini
 ENV TINI_VERSION v0.15.0
-ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /sbin/tini
-ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini.asc /sbin/tini.asc
-# ha.pool.sks-keyservers.net not reachable at build time
-# RUN gpg --keyserver ha.pool.sks-keyservers.net --recv-keys 595E85A6B1B4779EA4DAAEC70B588DFF0527A9B7 && gpg --verify /sbin/tini.asc 
-RUN chmod +x /sbin/tini
-RUN microdnf clean all
-EXPOSE 9000
+ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini ${APP_ROOT}/bin/tini
+### Setup user for build execution and application runtime
+RUN chmod -R ug+x ${APP_ROOT}/bin && sync && \
+    useradd -l -u ${USER_UID} -r -g 0 -d ${APP_ROOT} -s /sbin/nologin -c "${USER_NAME} user" ${USER_NAME} && \
+    chown -R ${USER_UID}:0 ${APP_ROOT} && \
+    chmod -R g=u ${APP_ROOT} && chown -R ${USER_UID}:0 /logsene-log-buffer && chown -R ${USER_UID}:0 /opt/spm
 
-ENTRYPOINT ["/sbin/tini", "--"]
-CMD ["run-sematext-agent"]
+### Containers should NOT run as root as a good practice
+USER 10001
+
+EXPOSE 9000
+VOLUME ${APP_ROOT}/spmlogs
+
+ENTRYPOINT ["/opt/spm/bin/tini", "--"]
+CMD ["/opt/spm/run.sh"]
 

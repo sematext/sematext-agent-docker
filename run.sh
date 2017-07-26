@@ -1,6 +1,6 @@
 #!/bin/sh
 set -e
-
+export APP_ROOT=${APP_ROOT:-/usr/src/app}
 # check docker secrets volume 
 export CONFIG_FILE=${CONFIG_FILE:-/run/secrets/sematext-agent}
 set -o allexport
@@ -23,7 +23,7 @@ export LOGSENE_ENABLED_DEFAULT=${LOGSENE_ENABLED_DEFAULT:-true}
 export ENABLE_AUTODETECT_SEVERITY=${ENABLE_AUTODETECT_SEVERITY:-true}
 # default is /tmp/ but this consumes 70 MB RAM
 # to speed up GeoIP lookups the directory could be set back to /tmp/
-export MAXMIND_DB_DIR=${MAXMIND_DB_DIR:-/usr/src/app/}
+export MAXMIND_DB_DIR=${MAXMIND_DB_DIR:-$APP_ROOT}
 export SPM_COLLECTION_INTERVAL_IN_MS=${SPM_COLLECTION_INTERVAL_IN_MS:-10000}
 export SPM_TRANSMIT_INTERVAL_IN_MS=${SPM_TRANSMIT_INTERVAL_IN_MS:-10000}
 
