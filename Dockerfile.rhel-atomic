@@ -1,4 +1,5 @@
-FROM registry.access.redhat.com/rhel7/rhel-atomic
+#FROM registry.access.redhat.com/rhel7/rhel-atomic
+FROM registry.access.redhat.com/rhel-atomic
 MAINTAINER Sematext Group Inc. <redhat@sematext.com>
 ### Atomic/OpenShift Labels - https://github.com/projectatomic/ContainerApplicationGenericLabels
 LABEL name="sematext/sematext-agent-docker" \
@@ -14,6 +15,9 @@ LABEL name="sematext/sematext-agent-docker" \
       io.k8s.display-name="Sematext Docker Agent" \
       io.openshift.tags="sematext,monitoring,logging"
 
+RUN mkdir /licenses
+COPY ./LICENSE /licenses/LICENSE
+COPY README.md /tmp/help.md
 
 WORKDIR /usr/src/app
 # Setup Node.js 
