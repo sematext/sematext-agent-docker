@@ -1,7 +1,23 @@
 FROM registry.access.redhat.com/rhel7/rhel
+MAINTAINER Sematext Group Inc. <redhat@sematext.com>
+### Atomic/OpenShift Labels - https://github.com/projectatomic/ContainerApplicationGenericLabels
+LABEL name="sematext/sematext-agent-docker" \
+      vendor="Sematext Group Inc." \
+      version="1.31.31" \
+      release="1" \
+      summary="Sematext Docker Agent" \
+      description="Sematext Agent is a modern, open-source, container-native monitoring and log collection agent for Docker. It runs as a tiny container on every Docker host and provides automatic collection and processing of Docker Metrics, Events and Logs for all cluster nodes and all auto-discovered containers. It works with Open Shift/Kubernetes or any other platform supporting Docker containers." \
+### Required labels above - recommended below
+      url="https://sematext.com/docker" \
+      run='docker run --privileged --name ${NAME} -e LOGSENE_TOKEN=${LOGSENE_TOKEN} -e ${SPM_TOKEN} -v /var/run/docker.sock:/var/run/docker.sock ${IMAGE}' \
+      io.k8s.description="Sematext Docker Agent collects metrics, docker events and container logs" \
+      io.k8s.display-name="Sematext Docker Agent" \
+      io.openshift.tags="sematext,monitoring,logging"
+
 WORKDIR /usr/src/app
 USER root
 ENV TINI_VERSION v0.15.0
+ENV NODEJS_VERSION 6
 # To use subscription inside container yum command has to be run first (before yum-config-manager)
 # https://access.redhat.com/solutions/1443553
 RUN yum repolist > /dev/null && \
@@ -11,13 +27,12 @@ RUN yum repolist > /dev/null && \
     yum-config-manager --disable epel >/dev/null 
 # Setup Node.js 
 RUN yum install -y gcc-c++ make git
-RUN curl --silent --location https://rpm.nodesource.com/setup_6.x | bash -
+RUN curl --silent --location https://rpm.nodesource.com/setup_${NODJS_VERSION}.x | bash -
 RUN yum install -y nodejs
 COPY . /usr/src/app
 RUN npm install -g 
 RUN ln -s /usr/src/app/run.sh /usr/local/bin/run-sematext-agent
 # Setup tini https://github.com/krallin/tini
-ENV TINI_VERSION v0.15.0
 ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /sbin/tini
 ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini.asc /sbin/tini.asc
 RUN gpg --keyserver ha.pool.sks-keyservers.net --recv-keys 595E85A6B1B4779EA4DAAEC70B588DFF0527A9B7 \
