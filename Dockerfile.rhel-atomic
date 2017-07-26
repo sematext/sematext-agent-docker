@@ -17,13 +17,8 @@ LABEL name="sematext/sematext-agent-docker" \
 
 WORKDIR /usr/src/app
 ENV TINI_VERSION v0.15.0
-# To use subscription inside container yum command has to be run first (before yum-config-manager)
-# https://access.redhat.com/solutions/1443553
-RUN microdnf install bash --enablerepo=rhel-7-server-rpms && \
-    microdnf update; microdnf clean all
-ENV SHELL /bin/bash
 # Setup Node.js 
-RUN microdnf install  gcc-c++ make git --enablerepo=rhel-7-server-rpms 
+RUN microdnf install  gcc-c++ make git --enablerepo=rhel-7-server-rpms && microdnf clean all
 # --enablerepo=rhel-7-server-optional-rpms 
 RUN curl --silent --location https://rpm.nodesource.com/setup_6.x | bash -
 RUN microdnf install -y nodejs
@@ -34,10 +29,12 @@ RUN ln -s /usr/src/app/run.sh /usr/local/bin/run-sematext-agent
 ENV TINI_VERSION v0.15.0
 ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /sbin/tini
 ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini.asc /sbin/tini.asc
-RUN gpg --keyserver ha.pool.sks-keyservers.net --recv-keys 595E85A6B1B4779EA4DAAEC70B588DFF0527A9B7 \
- && gpg --verify /sbin/tini.asc && chmod +x /sbin/tini
+# ha.pool.sks-keyservers.net not reachable at build time
+# RUN gpg --keyserver ha.pool.sks-keyservers.net --recv-keys 595E85A6B1B4779EA4DAAEC70B588DFF0527A9B7 && gpg --verify /sbin/tini.asc 
+RUN chmod +x /sbin/tini
 RUN microdnf clean all
 EXPOSE 9000
 
 ENTRYPOINT ["/sbin/tini", "--"]
 CMD ["run-sematext-agent"]
+
