@@ -16,7 +16,6 @@ LABEL name="sematext/sematext-agent-docker" \
 
 
 WORKDIR /usr/src/app
-ENV TINI_VERSION v0.15.0
 # Setup Node.js 
 RUN microdnf install  gcc-c++ make git --enablerepo=rhel-7-server-rpms && microdnf clean all
 # --enablerepo=rhel-7-server-optional-rpms 
