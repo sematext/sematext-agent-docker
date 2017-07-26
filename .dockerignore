@@ -1,5 +1,5 @@
-LICENSE
-*.md
+#LICENSE
+#*.md
 *.png
 node_modules
 kubernetes
