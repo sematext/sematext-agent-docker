@@ -36,6 +36,30 @@ _Gathered information:_
 |  **Log format detection and log parsers**|  NGINX, Apache httpd, Kafka, Solr, HBase, Zookeeper, Cassandra, MySQL, MongoDB, Redis, Elasticsearch, Nsq.io | 
 |                | JSON, Plain Text | 
 
+## Certified and public images 
+
+There are several places to obtain Sematext Docker Agent images: 
+
+1. Docker Certified images in the [Docker Store](https://store.docker.com/images/sematext-agent-monitoring-and-logging) 
+
+```
+docker pull store/sematext/sematext-agent-docker
+``` 
+
+2. Red Hat certified images in the [Red Hat Container Catalog](https://access.redhat.com/containers/?tab=overview&platform=docker#/registry.connect.redhat.com/sematext/sematext-agent-docker)
+
+```
+docker login registry.connect.redhat.com
+docker pull registry.connect.redhat.com/sematext/sematext-agent-docker
+```
+
+3. Public images from [Docker Hub](https://hub.docker.com/r/sematext/sematext-agent-docker/) 
+
+```
+docker pull sematext/sematext-agent-docker
+```
+
+
 ## Installation 
 
 1. Get a free account at [sematext.com/spm](https://apps.sematext.com/users-web/register.do)  
