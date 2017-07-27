@@ -36,7 +36,7 @@ COPY . ${APP_ROOT}
 COPY ./Dockerfile.rhel-atomic /Dockerfile
 WORKDIR ${APP_ROOT}
 
-RUN echo $PATH && /opt/rh/rh-nodejs6/root/usr/bin/npm install -g 
+RUN npm install -g 
 
 ENV APP_HOME=${APP_ROOT}/src  PATH=$PATH:${APP_ROOT}/bin
 RUN mkdir -p ${APP_HOME} && mkdir -p /logsene-log-buffer && mkdir -p /opt/spm
