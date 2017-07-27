@@ -17,17 +17,15 @@ LABEL name="sematext/sematext-agent-docker" \
 RUN mkdir /licenses
 COPY ./LICENSE /licenses/LICENSE
 COPY ./help.1 /help.1
-
+ENV PATH=$HOME/node_modules/.bin/:$HOME/.npm-global/bin/:/opt/rh/rh-nodejs6/root/usr/bin:/opt/rh/rh-nodejs6/root/usr/lib:$PATH
+ENV LD_LIBRARY_PATH=/opt/rh/rh-nodejs6/root/usr/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 ### Setup user for build execution and application runtime
 ENV APP_ROOT=/opt/spm \
     USER_NAME=default \
     USER_UID=10001
 
 # Setup Node.js 
-RUN curl --silent --location https://rpm.nodesource.com/setup_6.x | bash -
-RUN microdnf install  gcc-c++ make git nodejs --enablerepo=rhel-7-server-rpms && microdnf clean all
-# RUN microdnf install -y nodejs && microdnf clean all
-
+RUN microdnf install git  --enablerepo=rhel-7-server-rpms && microdnf install rh-nodejs6 rh-nodejs6-npm --enablerepo=rhel-server-rhscl-7-rpms --enablerepo=rhel-7-server-rpms && microdnf clean all
 
 ### Setup user for build execution and application runtime
 ENV APP_ROOT=/opt/spm \
@@ -38,7 +36,7 @@ COPY . ${APP_ROOT}
 COPY ./Dockerfile.rhel-atomic /Dockerfile
 WORKDIR ${APP_ROOT}
 
-RUN npm install -g 
+RUN echo $PATH && /opt/rh/rh-nodejs6/root/usr/bin/npm install -g 
 
 ENV APP_HOME=${APP_ROOT}/src  PATH=$PATH:${APP_ROOT}/bin
 RUN mkdir -p ${APP_HOME} && mkdir -p /logsene-log-buffer && mkdir -p /opt/spm
