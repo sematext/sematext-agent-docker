@@ -16,7 +16,7 @@ LABEL name="sematext/sematext-agent-docker" \
 
 RUN mkdir /licenses
 COPY ./LICENSE /licenses/LICENSE
-COPY README.md /tmp/help.md
+COPY ./help.1 /help.1
 
 ### Setup user for build execution and application runtime
 ENV APP_ROOT=/opt/spm \
@@ -24,9 +24,10 @@ ENV APP_ROOT=/opt/spm \
     USER_UID=10001
 
 # Setup Node.js 
-RUN microdnf install  gcc-c++ make git --enablerepo=rhel-7-server-rpms && microdnf clean all
 RUN curl --silent --location https://rpm.nodesource.com/setup_6.x | bash -
-RUN microdnf install -y nodejs && microdnf clean all
+RUN microdnf install  gcc-c++ make git nodejs --enablerepo=rhel-7-server-rpms && microdnf clean all
+# RUN microdnf install -y nodejs && microdnf clean all
+
 
 ### Setup user for build execution and application runtime
 ENV APP_ROOT=/opt/spm \
@@ -34,6 +35,7 @@ ENV APP_ROOT=/opt/spm \
     USER_UID=10001
 
 COPY . ${APP_ROOT}
+COPY ./Dockerfile.rhel-atomic /Dockerfile
 WORKDIR ${APP_ROOT}
 
 RUN npm install -g 
