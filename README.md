@@ -1,8 +1,8 @@
 # Image tags
 - latest - the latest release (stable)
 - X.Y.Z - release version (stable) 
-- X.Y.Z-rc1-N - release canditates (unstable)
-- dev - build from github master branch (unstable)
+- X.Y.Z-rc1-N - release candidates (unstable)
+- dev - build from GitHub master branch (unstable)
 - swarm3k - custom build for SwarmZilla, used only for the swarm3k test.
 
 # Sematext Agent for Docker
@@ -11,7 +11,7 @@
 |---|------------|------------|
 | [![Sematext Docker ETP partner for Logging](https://sematext.com/wp-content/uploads/2017/07/certified.png)](http://blog.sematext.com/2015/12/15/docker-logging-partner-sematext-logsene/) | [![Deploy to Docker Cloud](https://files.cloud.docker.com/images/deploy-to-dockercloud.svg)](https://cloud.docker.com/stack/deploy/?repo=https://github.com/sematext/sematext-agent-docker) | ![build status](https://api.travis-ci.org/sematext/sematext-agent-docker.svg) 
 
-Sematext Agent for Docker collects Metrics, Events and Logs from the Docker API for [SPM Docker Monitoring](http://sematext.com/spm/integrations/docker-monitoring.html) & [Logsene / Hosted ELK](http://sematext.com/logsene) Log Management. Works with CoreOS, RancherOS, Docker Swarm, Kubernetes, Apache Mesos, Hashicorp Nomad, Amzon ECS, ... see installation. 
+Sematext Agent for Docker collects Metrics, Events and Logs from the Docker API for [SPM Docker Monitoring](http://sematext.com/spm/integrations/docker-monitoring.html) & [Logsene / Hosted ELK](http://sematext.com/logsene) Log Management. Works with CoreOS, RancherOS, Docker Swarm, Kubernetes, Apache Mesos, Hashicorp Nomad, Amazon ECS, ... see the installation. 
 
 _How it works_
 
@@ -74,7 +74,7 @@ docker pull sematext/sematext-agent-docker
 
     You’ll see your Docker metrics in SPM after about a minute. 
 
-5. Watch metrics, use anomaly detection for alerts, create e-mail reports and [much more ...](http://blog.sematext.com/2015/06/09/docker-monitoring-support/)
+5. Watch metrics, use anomaly detection for alerts, create email reports and [much more ...](http://blog.sematext.com/2015/06/09/docker-monitoring-support/)
 
 ![](https://raw.githubusercontent.com/sematext/sematext-agent-docker/master/docker-overview-spm.png)
 
@@ -88,11 +88,11 @@ Docker Events:
 | Parameter / Environment variable | Description |
 |-----------|-------------|
 |**Required Parameters**| |
-| SPM_TOKEN        | SPM Application Token, enables metric and event collection |
-| LOGSENE_TOKEN    | Logsene Application Token enables logging to Logsene, see logging specifc parameters for filter options and Log Routing section to route logs from different containers to separate Logsene applications| 
+| SPM_TOKEN        | SPM Application Token enables metric and event collection |
+| LOGSENE_TOKEN    | Logsene Application Token enables logging to Logsene, see logging specific parameters for filter options and Log Routing section to route logs from different containers to separate Logsene applications| 
 | ```-v /var/run/docker.sock ```  | Path to the docker socket (optional, if dockerd provides TCP on 2375, see also DOCKER_PORT and DOCKER_HOST parameter) |
-|**TCP and TLS connection** | If the unix socket is not available Sematext Agent assumes the Container Gateway Address (autodetect) and port 2375 as default (no TLS) - this needs no configuration. In case the Docker Daemon TCP settings are different, you have to configure the TCP settings. The TCP settings can be modified with the following parameters|
-|DOCKER_HOST| e.g. tcp://ip-reachable-from-container:2375/ - default value 'unix:///var/run/docker.sock'. When the unix socket is not available the agent tries to connect to tcp://gateway:2375. In case a TCP socket is used there is no need to mount the Docker unix socket as volume |
+|**TCP and TLS connection** | If the Unix socket is not available Sematext Agent assumes the Container Gateway Address (autodetect) and port 2375 as default (no TLS) - this needs no configuration. In case the Docker Daemon TCP settings are different, you have to configure the TCP settings. The TCP settings can be modified with the following parameters|
+|DOCKER_HOST| e.g. tcp://ip-reachable-from-container:2375/ - default value 'unix:///var/run/docker.sock'. When the Unix socket is not available the agent tries to connect to tcp://gateway:2375. In case a TCP socket is used there is no need to mount the Docker Unix socket as volume |
 | DOCKER_PORT | Sematext Agent will use its gateway address (autodetect) with the given DOCKER_PORT|
 |DOCKER_TLS_VERIFY | 0 or 1|
 |DOCKER_CERT_PATH | Path to your certificate files, mount the path to the container with "-v $DOCKER_CERT_PATH:$DOCKER_CERT_PATH" |  
@@ -117,10 +117,10 @@ Docker Events:
 | LOGAGENT_PATTERNS | Pass patterns.yml via env. variable e.g. ```-e LOGAGENT_PATTERNS="$(cat ./patters.yml)"``` |
 | PATTERN_MATCHING_ENABLED | Activate [logagent-js parser](https://sematext.github.io/logagent-js/parser/), default value is ```true```. To disable the log parser set the value to ```false```. This could increase the throughput of log processing for nodes with a very high log volume.|
 | -v /yourpatterns/patterns.yml:/etc/logagent/patterns.yml | to provide custom patterns for log parsing, see [logagent-js](https://github.com/sematext/logagent-js)|
-| -v /tmp:/logsene-log-buffer | Directory to store logs, in case of a network or service outage. Docker Agent deletes these files after successful transmission.|
+| -v /tmp:/logsene-log-buffer | Directory to store logs, in a case of a network or service outage. Docker Agent deletes these files after successful transmission.|
 | GEOIP_ENABLED | ```true```enables GeoIP lookups in the log parser, default value: ```false```| 
 | MAXMIND_DB_DIR | Directory for the Geo-IP lite database, must end with ```/```. Storing the DB in a volume could save downloads for updates after restarts. Using ```/tmp/``` (ramdisk) could speed up Geo-IP lookups (consumes add. ~30 MB main memory).|
-|ENABLE_LOGSENE_STATS | Enables logging of tranmission stats to Logsene. Default value 'false'. Provides number of logs received, number of logs shipped, number of failed/successful http tranmissions (bulk requests to Logsene) and re-transmissions of failed requests. |
+|ENABLE_LOGSENE_STATS | Enables logging of transmission stats to Logsene. Default value 'false'. Provides a number of logs received, a number of logs shipped, number of failed/successful HTTP transmissions (bulk requests to Logsene) and retransmissions of failed requests. |
 
 # Log Routing
 
@@ -146,13 +146,13 @@ SPM for Docker recognizes log formats - so your logs arrive in a structured form
 The format recognition, data extractions, date parsing etc. is provided by [logagent-js](https://github.com/sematext/logagent-js) and covers:
 - Format detection e.g. for
   - Mongo DB
-	- Nginx
-	- Apache httpd, Kafka, Cassandra, HBase, Solr, Zookeeper
-	- MySQL
-	- Redis  
+    - Nginx
+    - Apache httpd, Kafka, Cassandra, HBase, Solr, Zookeeper
+    - MySQL
+    - Redis  
 - plain text log messages
 - line delimited JSON logs
-- GeoIP enrichment for webserver logs, or any other field defined
+- GeoIP enrichment for webserver logs or any other field defined
   in the pattern definitions
 
 To use a custom pattern definition simply mount a volume to '/etc/logagent/patterns.yml':
@@ -202,7 +202,7 @@ Please read [Docker Swarm: Collecting Metrics, Events & Logs](http://blog.semate
 
 Please read [RancherOS Monitoring and Logging Support](https://sematext.com/blog/2016/08/31/rancheros-monitoring-and-logging-support/) there are various deployment options for Rancher, Swarm, Kubernetes or Mesos. 
 
-In addition we recommend to read Rancher Labs blog post about the [RancherOS Catalog Entry](http://rancher.com/new-rancher-community-catalog-monitoring-logging-sematext/). 
+In addition, we recommend reading Rancher Labs blog post about the [RancherOS Catalog Entry](http://rancher.com/new-rancher-community-catalog-monitoring-logging-sematext/). 
 
 # Installation on Nomad by Hashicorp
 
@@ -210,7 +210,7 @@ See and example of the [job description](https://github.com/sematext/sematext-ag
 
 # Installation on Mesos / Marathon
 
-Please note that you have to specify the number of Mesos nodes (instances), SPM App Token and Logsene App Token. Example call to the Marathon API: 
+Please note that you have to specify the number of Mesos nodes (instances), SPM App Token and Logsene App Token. The example call to the Marathon API: 
 
 ```
 curl -XPOST -H "Content-type: application/json" http://your_marathon_server:8080/v2/apps  -d '
