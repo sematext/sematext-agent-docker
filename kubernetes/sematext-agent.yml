@@ -10,7 +10,8 @@ spec:
         app: sematext-agent
     spec:
       nodeSelector: {}
-      hostNetwork: true
+      # For setups with Rancher server you might need to use the host network (or setup DNS to reach public internet for sematext.com)
+      # hostNetwork: true
       dnsPolicy: "ClusterFirst"
       restartPolicy: "Always"
       containers:
