@@ -28,9 +28,7 @@ export SPM_COLLECTION_INTERVAL_IN_MS=${SPM_COLLECTION_INTERVAL_IN_MS:-10000}
 export SPM_TRANSMIT_INTERVAL_IN_MS=${SPM_TRANSMIT_INTERVAL_IN_MS:-10000}
 
 if [ -n "${PATTERNS_URL}" ]; then
-  echo downloading logagent patterns: ${PATTERNS_URL}
-  export LOGAGENT_PATTERNS=$(curl -s ${PATTERNS_URL})
-  # echo "$LOGAGENT_PATTERNS"
+  mkdir -p /etc/logagent
 fi
 
 if [ -n "${LOGAGENT_PATTERNS}" ]; then

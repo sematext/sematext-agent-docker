@@ -1,12 +1,10 @@
 FROM node:8-alpine
 
 RUN apk --no-cache add \
-    git \
     tini \
-    procps \
-    curl \
-    coreutils \
-    bash
+    procps 
+#    coreutils \
+#    bash
 
 COPY . /usr/src/app
 WORKDIR /usr/src/app
