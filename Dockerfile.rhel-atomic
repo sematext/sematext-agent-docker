@@ -39,7 +39,7 @@ WORKDIR ${APP_ROOT}
 RUN npm install -g 
 
 ENV APP_HOME=${APP_ROOT}/src  PATH=$PATH:${APP_ROOT}/bin
-RUN mkdir -p ${APP_HOME} && mkdir -p /logsene-log-buffer && mkdir -p /opt/spm
+RUN mkdir -p ${APP_ROOT}/spmlogs && mkdir -p /logsene-log-buffer && mkdir -p /opt/spm
 # Setup tini https://github.com/krallin/tini
 ENV TINI_VERSION v0.15.0
 ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini ${APP_ROOT}/bin/tini
