@@ -1,4 +1,3 @@
-# Kubernetes 1.1.8 and 1.2
 apiVersion: extensions/v1beta1
 kind: DaemonSet
 metadata:
@@ -10,8 +9,7 @@ spec:
         app: sematext-agent
     spec:
       nodeSelector: {}
-      # For setups with Rancher server you might need to use the host network (or setup DNS to reach public internet for sematext.com)
-      # hostNetwork: true
+      hostNetwork: true
       dnsPolicy: "ClusterFirst"
       restartPolicy: "Always"
       containers:
@@ -28,6 +26,9 @@ spec:
             name: docker-sock
           - mountPath: /etc/localtime
             name: localtime
+          - mountPath: /rootfs
+            name: rootfs
+            readOnly: true
         securityContext:
           privileged: true
       volumes:
@@ -37,3 +38,6 @@ spec:
         - name: localtime
           hostPath:
             path: /etc/localtime
+        - name: rootfs
+          hostPath:
+            path: /
