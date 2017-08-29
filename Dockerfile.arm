@@ -1,10 +1,8 @@
 FROM resin/armhf-alpine-node:6-slim
 
 RUN apk --no-cache add \
-    git \
     tini \
     procps \
-    curl \
     coreutils
 
 COPY . /usr/src/app
