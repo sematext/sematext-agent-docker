@@ -26,6 +26,7 @@ ENV APP_ROOT=/opt/spm \
 
 # Setup Node.js 
 RUN microdnf install git  --enablerepo=rhel-7-server-rpms && microdnf install rh-nodejs6 rh-nodejs6-npm --enablerepo=rhel-server-rhscl-7-rpms --enablerepo=rhel-7-server-rpms && microdnf clean all
+RUN microdnf update 
 
 ### Setup user for build execution and application runtime
 ENV APP_ROOT=/opt/spm \
