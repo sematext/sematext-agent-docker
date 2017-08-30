@@ -29,6 +29,8 @@ spec:
           - mountPath: /rootfs
             name: rootfs
             readOnly: true
+#          - mountPath: /etc/logagent
+#            name: patterns
         securityContext:
           privileged: true
       volumes:
@@ -41,3 +43,9 @@ spec:
         - name: rootfs
           hostPath:
             path: /
+#        - name: patterns
+#          configMap:
+#            name: sematext-agent-patterns
+#            items:
+#            - key: patterns.yml
+#              path: patterns.yml
