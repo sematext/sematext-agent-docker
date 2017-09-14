@@ -60,7 +60,7 @@ docker pull docker.io/sematext/sematext-agent-docker
 # Support 
 
 1. [Sematext Docker Agent Homepage](http://sematext.com/docker/)
-2. [Sematext Docker Agent documentation](http://sematext.com/docs/sematext-docker-agent/)
+2. [Sematext Docker Agent Documentation](http://sematext.com/docs/sematext-docker-agent/)
 2. Chat with us in the [Sematext user interface](https://apps.sematext.com/users-web/login.do) or drop an e-mail to support@sematext.com
 3. Open an issue [here](https://github.com/sematext/sematext-agent-docker/issues) 
 4. Contribution guide [here](https://github.com/sematext/sematext-agent-docker/blob/master/contribute.md)
