@@ -1,0 +1,10 @@
+FROM stefanscherer/node-windows:8.4-nano
+
+COPY . /usr/src/app
+WORKDIR /usr/src/app
+
+RUN npm install -g
+
+EXPOSE 9000
+
+CMD ["powershell", "-Command", "./run.ps1"]
