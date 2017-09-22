@@ -106,6 +106,8 @@ SKIP\_BY\_IMAGE		Regular expression to black list image names for logging
 
 PATTERNS\_URL		Load pattern.yml via HTTP e.g. \fB\fC\-e PATTERNS\_URL=https://raw.githubusercontent.com/sematext/logagent\-js/master/patterns.yml\fR	
 
+LOGAGENT\_PATTERNS\_BASE64		Set to "true" if the LOGAGENT\_PATTERNS patterns file you are passing in via env. variable is base64 encoded e.g \fB\fC\-e LOGAGENT\_PATTERNS="$(cat ./patterns.yml | base64)"\fR. Useful if your params file is not getting set properly due to shell interpretation or otherwise.
+
 LOGAGENT\_PATTERNS		Pass patterns.yml via env. variable e.g. \fB\fC\-e LOGAGENT\_PATTERNS="$(cat ./patters.yml)"\fR	
 
 PATTERN\_MATCHING\_ENABLED		Activate 
