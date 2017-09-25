@@ -33,7 +33,7 @@ function log_count_test ()
 	# each nginx request generates 2 logs
 	export generated_logs=250
 	export result=$(expr $count  - $generated_logs)
-	if [ $result == 0 ]; then
+	if [ "$result" == 0 ]; then
 		echo SUCCESS $count logs shipped, diff: $result
 		return 0
 	else
