@@ -32,9 +32,16 @@ if [ -n "${PATTERNS_URL}" ]; then
 fi
 
 if [ -n "${LOGAGENT_PATTERNS}" ]; then
-  mkdir -p /etc/logagent
-  echo "writing LOGAGENT_PATTERNS to /etc/logagent/patterns.yml"
-  echo "$LOGAGENT_PATTERNS" > /etc/logagent/patterns.yml
+  if [ "${LOGAGENT_PATTERNS_BASE64}" == "true" ]; then
+    # If the logagent patterns file is an environment variable, and base64 encoded
+    mkdir -p /etc/logagent
+    echo "writing LOGAGENT_PATTERNS to /etc/logagent/patterns.yml"
+    echo "$LOGAGENT_PATTERNS" | base64 -d > /etc/logagent/patterns.yml
+  else
+    mkdir -p /etc/logagent
+    echo "writing LOGAGENT_PATTERNS to /etc/logagent/patterns.yml"
+    echo "$LOGAGENT_PATTERNS" > /etc/logagent/patterns.yml
+  fi
 fi
 
 export GEOIP_ENABLED=${GEOIP_ENABLED:-"false"}
