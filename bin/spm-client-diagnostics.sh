@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/bin/sh
+apk add --update curl > /dev/null
 mkdir spmlogs 2> /dev/null
 node_modules/docker-stats/stats.js > ./spmlogs/raw-metrics.log & pid=$!
 sleep 2 && kill $pid
