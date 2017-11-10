@@ -52,7 +52,7 @@
     "adm-zip": "^0.4.7",
     "docker-allcontainers": "^0.7.0",
     "docker-events": "^0.0.2",
-    "docker-loghose": "^1.5.1",
+    "docker-loghose": "^1.6.2",
     "docker-stats": "^0.7.2",
     "dockerode": "^2.3.1",
     "download": "^6.2.5",
