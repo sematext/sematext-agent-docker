@@ -4,7 +4,7 @@ MAINTAINER Sematext Group Inc. <redhat@sematext.com>
 LABEL name="sematext/sematext-agent-docker" \
       vendor="Sematext Group Inc." \
       version="1.31.31" \
-      release="1" \
+      release="2" \
       summary="Sematext Docker Agent" \
       description="Sematext Agent is a modern, open-source, container-native monitoring and log collection agent for Docker. It runs as a tiny container on every Docker host and provides automatic collection and processing of Docker Metrics, Events and Logs for all cluster nodes and all auto-discovered containers. It works with Open Shift/Kubernetes or any other platform supporting Docker containers." \
 ### Required labels above - recommended below
