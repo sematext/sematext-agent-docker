@@ -22,7 +22,7 @@ function log_count_test ()
 	echo TEST_ID = $TEST_ID
   sleep 20 
   docker run --rm -t --net=host jstarcher/siege -r 5 -c 50 http://127.0.0.1:$NGINX_PORT/${TEST_ID} | grep Transactions
-	# docker logs -f sematext-agent &
+	docker logs -f sematext-agent &
 	sleep 90 
 	echo '{"query" : { "query_string" : {"query": "message:'$TEST_ID' AND status_code:404" }}}' > query.txt
 	echo curl -XPOST "https://logsene-receiver.sematext.com/$LOGSENE_TOKEN/_count" -d @query.txt
