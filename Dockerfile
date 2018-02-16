@@ -12,7 +12,7 @@ WORKDIR /usr/src/app
 # RUN apk --no-cache add --virtual deps git 
 RUN npm install -g 
 # remove vulnerable (indirect) dependency to zmq 
-RUN npm rm -g aedes
+RUN npm rm -g zeromq
 # RUN apk del libzmq
 # RUN apk del deps 
 RUN ln -s /usr/src/app/run.sh /usr/local/bin/run-sematext-agent
