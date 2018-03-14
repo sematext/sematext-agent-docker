@@ -27,6 +27,34 @@ export MAXMIND_DB_DIR=${MAXMIND_DB_DIR:-$APP_ROOT}
 export SPM_COLLECTION_INTERVAL_IN_MS=${SPM_COLLECTION_INTERVAL_IN_MS:-10000}
 export SPM_TRANSMIT_INTERVAL_IN_MS=${SPM_TRANSMIT_INTERVAL_IN_MS:-10000}
 
+function generate_eu_config()
+{
+echo -e "SPM_RECEIVER_URL=https://spm-receiver.eu.sematext.com/receiver/v1
+EVENTS_RECEIVER_URL=https://event-receiver.eu.sematext.com
+LOGSENE_RECEIVER_URL=https://logsene-receiver.eu.sematext.com" > /etc/sematext/receivers.config
+}
+
+function generate_us_config()
+{
+echo -e "SPM_RECEIVER_URL=https://spm-receiver.sematext.com/receiver/v1
+EVENTS_RECEIVER_URL=https://event-receiver.sematext.com
+LOGSENE_RECEIVER_URL=https://logsene-receiver.sematext.com" > /etc/sematext/receivers.config
+}
+
+if [ "$REGION" == "EU" ]; then 
+  generate_eu_config
+  echo "Set region $OPTARG in /etc/sematext/receivers.config:"
+  cat /etc/sematext/receivers.config
+  exit 0
+fi;
+if [ "$REGION" == "US" ]; then 
+  generate_us_config
+  echo "Set region $OPTARG in /etc/sematext/receivers.config:"
+  cat /etc/sematext/receivers.config
+  exit 0
+fi;
+      
+
 if [ -n "${PATTERNS_URL}" ]; then
   mkdir -p /etc/logagent
 fi
