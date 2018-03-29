@@ -1,4 +1,4 @@
-FROM node:8-alpine
+FROM node:8.11-alpine
 # RUN apk update && apk upgrade
 RUN apk --no-cache add \
     tini \
