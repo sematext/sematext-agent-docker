@@ -58,7 +58,7 @@
     "download": "^6.2.5",
     "flat": "^4.0.0",
     "lodash": "^4.17.4",
-    "logsene-js": "^1.1.52",
+    "logsene-js": "^1.1.53",
     "ls": "^0.2.1",
     "measured": "^1.1.0",
     "minimatch": "^3.0.3",
