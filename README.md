@@ -9,7 +9,7 @@
 
 ||||
 |---|------------|------------|
-| [![Sematext Docker Certified](https://sematext.com/wp-content/uploads/2017/07/certified.png)](https://store.docker.com/images/sematext-agent-monitoring-and-logging) | [![Deploy to Docker Cloud](https://files.cloud.docker.com/images/deploy-to-dockercloud.svg)](https://cloud.docker.com/stack/deploy/?repo=https://github.com/sematext/sematext-agent-docker) | ![build status](https://api.travis-ci.org/sematext/sematext-agent-docker.svg) 
+| [![Sematext Docker Certified](https://sematext.com/wp-content/uploads/2017/07/certified.png)](https://store.docker.com/images/sematext-agent-monitoring-and-logging) | ![build status](https://api.travis-ci.org/sematext/sematext-agent-docker.svg) 
 
 Sematext Agent for Docker collects Metrics, Events and Logs from the Docker API for [SPM Docker Monitoring](http://sematext.com/spm/integrations/docker-monitoring.html) & [Logsene / Hosted ELK](http://sematext.com/logsene) Log Management. Works with CoreOS, Rancher, Docker Swarm, Kubernetes, Apache Mesos, Hashicorp Nomad, Amazon ECS, ... see the [installation](http://sematext.com/docs/sematext-docker-agent/installation/). 
 
@@ -17,7 +17,7 @@ Sematext Agent for Docker collects Metrics, Events and Logs from the Docker API 
 # Quickstart 
 
 1. Get a free account at [sematext.com/spm](https://apps.sematext.com/ui/registration)  
-2. [Create an SPM App](https://apps.sematext.com/ui/integrations) of type "Docker" for Docker metrics. Copy its App Token.  
+2. [Create a Monitoring App](https://apps.sematext.com/ui/integrations) of type "Docker" for Docker metrics. Copy its App Token.  
    Optionally, [create a Logs App](https://apps.sematext.com/ui/integrations) to obtain an App Token for [Logsene](http://www.sematext.com/logsene/)  
 3. Run the image using individual SPM and Logsene tokens
 
