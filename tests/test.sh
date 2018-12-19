@@ -28,7 +28,7 @@ function log_count_test ()
 	echo curl -XPOST "https://logsene-receiver.sematext.com/$LOGSENE_TOKEN/_count" -d @query.txt
 	echo Elasticsearch Query: 
 	cat query.txt
-	export count=$(curl -XPOST "logsene-receiver.sematext.com/$LOGSENE_TOKEN/_count" -d @query.txt | jq '.count')
+	export count=$(curl -XPOST "https://logsene-receiver.sematext.com/$LOGSENE_TOKEN/_count" -d @query.txt | jq '.count')
 	echo "log count in Logsene: $count"
 	# each nginx request generates 2 logs
 	export generated_logs=250
