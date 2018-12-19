@@ -48,7 +48,7 @@ function container_count ()
 	 sleep 5
 	 docker rm -f nginx2	 
 	 sleep 40  # wait for reporting in SDA console ...
-	 container_count=$(docker logs sematext-agent 2>&1 | grep -E "body.*container-count.*nginx.*" | awk -F'[t|"}/]' '{print $11}' | tail -n 1) 
+	 container_count=$(docker logs sematext-agent 2>&1 | grep -E "body.*container-count.*nginx.*" | awk -F'[t|"}/]' '{print $10}' | tail -n 1) 
 	 docker_ps=$(docker ps | grep -v IMAGE | wc -l)
 	 docker_ps=$(expr $docker_ps \* 1)
 	 container_count=$(expr $container_count \* 1)
