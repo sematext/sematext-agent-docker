@@ -16,7 +16,7 @@ Sematext Agent for Docker collects Metrics, Events and Logs from the Docker API 
 
 # Quickstart 
 
-1. Get [Sematext account](https://apps.sematext.com/ui/registration)  
+1. Get [free Sematext account](https://apps.sematext.com/ui/registration)  
 2. [Create a Monitoring App](https://apps.sematext.com/ui/integrations) of type "Docker" for Docker metrics. Copy its App Token.  
    Optionally, [create a Logs App](https://apps.sematext.com/ui/integrations)
 3. Run the image using individual App tokens for your Monitoring and Logs Apps
