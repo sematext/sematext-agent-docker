@@ -11,15 +11,15 @@
 |---|------------|------------|
 | [![Sematext Docker Certified](https://sematext.com/wp-content/uploads/2017/07/certified.png)](https://store.docker.com/images/sematext-agent-monitoring-and-logging) | ![build status](https://api.travis-ci.org/sematext/sematext-agent-docker.svg) 
 
-Sematext Agent for Docker collects Metrics, Events and Logs from the Docker API for [SPM Docker Monitoring](http://sematext.com/spm/integrations/docker-monitoring.html) & [Logsene / Hosted ELK](http://sematext.com/logsene) Log Management. Works with CoreOS, Rancher, Docker Swarm, Kubernetes, Apache Mesos, Hashicorp Nomad, Amazon ECS, ... see the [installation](http://sematext.com/docs/sematext-docker-agent/installation/). 
+Sematext Agent for Docker collects Metrics, Events and Logs from the Docker API for [Docker Monitoring & Logging](http://sematext.com/docker) & [Hosted Elastic Stack](http://sematext.com/logsene). Works with CoreOS, Rancher, Docker Swarm, Kubernetes, Apache Mesos, Hashicorp Nomad, Amazon ECS, ... see the [installation](http://sematext.com/docs/sematext-docker-agent/installation/). 
 
 
 # Quickstart 
 
-1. Get a free account at [sematext.com/spm](https://apps.sematext.com/ui/registration)  
+1. Free account: [sematext.com/spm](https://apps.sematext.com/ui/registration)  
 2. [Create a Monitoring App](https://apps.sematext.com/ui/integrations) of type "Docker" for Docker metrics. Copy its App Token.  
-   Optionally, [create a Logs App](https://apps.sematext.com/ui/integrations) to obtain an App Token for [Logsene](http://www.sematext.com/logsene/)  
-3. Run the image using individual SPM and Logsene tokens
+   Optionally, [create a Logs App](https://apps.sematext.com/ui/integrations)
+3. Run the image using individual App tokens for your Monitoring and Logs Apps
 
    ```
    docker pull sematext/sematext-agent-docker
@@ -61,6 +61,6 @@ docker pull docker.io/sematext/sematext-agent-docker
 
 1. [Sematext Docker Agent Homepage](http://sematext.com/docker/)
 2. [Sematext Docker Agent Documentation](http://sematext.com/docs/sematext-docker-agent/)
-2. Chat with us in the [Sematext user interface](https://apps.sematext.com/) or drop an e-mail to support@sematext.com
+2. Chat with us via [Sematext Cloud UI](https://apps.sematext.com/) or drop an e-mail to support@sematext.com
 3. Open an issue [here](https://github.com/sematext/sematext-agent-docker/issues) 
 4. Contribution guide [here](https://github.com/sematext/sematext-agent-docker/blob/master/contribute.md)
