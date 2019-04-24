@@ -1,12 +1,12 @@
 # This image is deprecated
 
-Please use [sematext/agent](https://hub.docker.com/r/sematext/agent/) for monitoring and [sematext/logagent](https://hub.docker.com/r/sematext/logagent/) for log log collection. 
+Please use [sematext/agent](https://hub.docker.com/r/sematext/agent/) for monitoring and [sematext/logagent](https://hub.docker.com/r/sematext/logagent/) for log  collection. 
 
-Both images are avialable as Docker certified images: 
+Both images are available as Docker certified images: 
 - [sematext/agent certified](https://hub.docker.com/_/sematext-agent-monitoring-and-logging)
 - [sematext/logagent certified](https://hub.docker.com/_/logagent)
 
-Please read the following blog posts for more details: 
+See the following posts for more details: 
 
 - [Better Observability with New Container Agents](https://sematext.com/blog/better-observability-new-container-agents/)
 - [Docker Container Monitoring with Sematext](https://sematext.com/blog/docker-container-monitoring-with-sematext/)
