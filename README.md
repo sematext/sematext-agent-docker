@@ -1,4 +1,6 @@
-This image is deprecated. Please use [sematext/agent](https://hub.docker.com/r/sematext/agent/) for monitoring and [sematext/logagent](https://hub.docker.com/r/sematext/logagent/) for log log collection. 
+# This image is deprecated
+
+Please use [sematext/agent](https://hub.docker.com/r/sematext/agent/) for monitoring and [sematext/logagent](https://hub.docker.com/r/sematext/logagent/) for log log collection. 
 
 Both images are avialable as Docker certified images: 
 - [sematext/agent certified](https://hub.docker.com/_/sematext-agent-monitoring-and-logging)
