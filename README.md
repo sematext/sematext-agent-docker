@@ -13,13 +13,6 @@ See the following posts for more details:
 
 
 
-# Image tags
-- latest - the latest release (stable)
-- X.Y.Z - release version (stable) 
-- X.Y.Z-rc1-N - release candidates (unstable)
-- dev - build from GitHub master branch (unstable)
-- swarm3k - custom build for SwarmZilla, used only for the swarm3k test.
-
 # Sematext Agent for Docker
 
 ||||
@@ -75,7 +68,5 @@ docker pull docker.io/sematext/sematext-agent-docker
 # Support 
 
 1. [Sematext Docker Agent Homepage](http://sematext.com/docker/)
-2. [Sematext Docker Agent Documentation](http://sematext.com/docs/sematext-docker-agent/)
+2. [Sematext Docker Agent Documentation](https://sematext.com/docs/agents/sematext-agent/containers/installation/)
 2. Chat with us via [Sematext Cloud UI](https://apps.sematext.com/) or drop an e-mail to support@sematext.com
-3. Open an issue [here](https://github.com/sematext/sematext-agent-docker/issues) 
-4. Contribution guide [here](https://github.com/sematext/sematext-agent-docker/blob/master/contribute.md)
